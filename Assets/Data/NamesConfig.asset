@@ -17,3 +17,7 @@ MonoBehaviour:
     BusinessName: Business
     FirstUpgradeName: First Upgrade
     SecondUpgradeName: Second Upgrade
+  - Id: 1
+    BusinessName: Business 1
+    FirstUpgradeName: First Upgrade
+    SecondUpgradeName: Second Upgrade

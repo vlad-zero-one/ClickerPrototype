@@ -18,11 +18,30 @@ namespace Game.View
         [Space]
         [SerializeField] private BusinessUpgradeView firstUpgrade;
         [SerializeField] private BusinessUpgradeView secondUpgrade;
+        [Space]
+        [SerializeField] private string priceFormat;
 
         private void Start()
         {
-            firstUpgrade.Init();
+            var conf = new Configs.BusinessUpgradeData();
+            conf.Price = 1;
+            conf.Factor = 0.5f;
+
+            var bu = new BusinessUpgrade(conf, "New Name");
+
+            firstUpgrade.Init(bu);
             firstUpgrade.OnClick += () => Debug.LogError("!");
+        }
+
+        public void Init(Business business)
+        {
+            businessName.SetText(business.Name);
+            levelText.SetText(business.Level.ToString());
+            incomeText.SetText(priceFormat, (float)business.Income);
+            levelUpPrice.SetText(priceFormat, (float)business.LevelUpPrice);
+
+            firstUpgrade.Init(business.firstUpgrade);
+            secondUpgrade.Init(business.secondUpgrade);
         }
 
         private void Update()

@@ -14,53 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Values:
   - Id: 1
-    IncomeTime: 0
-    BaseLevelUpPrice: 0
-    BaseIncome: 0
+    IncomeTime: 3
+    BaseLevelUpPrice: 3
+    BaseIncome: 3
     FirstUpgradeData:
-      Price: 0
-      Factor: 0
+      Price: 50
+      Factor: 0.5
     SecondUpgradeData:
-      Price: 0
-      Factor: 0
-  - Id: 2
-    IncomeTime: 0
-    BaseLevelUpPrice: 0
-    BaseIncome: 0
-    FirstUpgradeData:
-      Price: 0
-      Factor: 0
-    SecondUpgradeData:
-      Price: 0
-      Factor: 0
-  - Id: 3
-    IncomeTime: 0
-    BaseLevelUpPrice: 0
-    BaseIncome: 0
-    FirstUpgradeData:
-      Price: 0
-      Factor: 0
-    SecondUpgradeData:
-      Price: 0
-      Factor: 0
-  - Id: 4
-    IncomeTime: 0
-    BaseLevelUpPrice: 0
-    BaseIncome: 0
-    FirstUpgradeData:
-      Price: 0
-      Factor: 0
-    SecondUpgradeData:
-      Price: 0
-      Factor: 0
-  - Id: 5
-    IncomeTime: 0
-    BaseLevelUpPrice: 0
-    BaseIncome: 0
-    FirstUpgradeData:
-      Price: 0
-      Factor: 0
-    SecondUpgradeData:
-      Price: 0
-      Factor: 0
+      Price: 400
+      Factor: 1
   InitialBusinessId: 1

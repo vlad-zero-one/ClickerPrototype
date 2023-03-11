@@ -4,11 +4,11 @@ namespace Game
 {
     public class Business
     {
+        public BusinessUpgrade firstUpgrade;
+        public BusinessUpgrade secondUpgrade;
+
         private BusinessData data;
         private BusinessNamesData namesData;
-
-        private BusinessUpgrade firstUpgrade;
-        private BusinessUpgrade secondUpgrade;
 
         public Business(BusinessData data, BusinessNamesData namesData)
         {
