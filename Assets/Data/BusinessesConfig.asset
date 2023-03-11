@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d7fa0c70d66744bdc19d60e7e38fe, type: 3}
+  m_Name: BusinessesConfig
+  m_EditorClassIdentifier: 
+  Values:
+  - Id: 1
+    IncomeTime: 0
+    BaseLevelUpPrice: 0
+    BaseIncome: 0
+    FirstUpgradeData:
+      Price: 0
+      Factor: 0
+    SecondUpgradeData:
+      Price: 0
+      Factor: 0
+  - Id: 2
+    IncomeTime: 0
+    BaseLevelUpPrice: 0
+    BaseIncome: 0
+    FirstUpgradeData:
+      Price: 0
+      Factor: 0
+    SecondUpgradeData:
+      Price: 0
+      Factor: 0
+  - Id: 3
+    IncomeTime: 0
+    BaseLevelUpPrice: 0
+    BaseIncome: 0
+    FirstUpgradeData:
+      Price: 0
+      Factor: 0
+    SecondUpgradeData:
+      Price: 0
+      Factor: 0
+  - Id: 4
+    IncomeTime: 0
+    BaseLevelUpPrice: 0
+    BaseIncome: 0
+    FirstUpgradeData:
+      Price: 0
+      Factor: 0
+    SecondUpgradeData:
+      Price: 0
+      Factor: 0
+  - Id: 5
+    IncomeTime: 0
+    BaseLevelUpPrice: 0
+    BaseIncome: 0
+    FirstUpgradeData:
+      Price: 0
+      Factor: 0
+    SecondUpgradeData:
+      Price: 0
+      Factor: 0
+  InitialBusinessId: 1
