@@ -12,6 +12,7 @@ namespace Game
         [Header("Configs")]
         [SerializeField] private BusinessesConfig businessesConfig;
         [SerializeField] private NamesConfig namesConfig;
+        [SerializeField] private SaveConfig saveConfig;
         [Header("Scene Objects")]
         [SerializeField] private BusinessViewController viewController;
 
@@ -39,6 +40,7 @@ namespace Game
 
                 .Inject(businessesConfig)
                 .Inject(namesConfig)
+                .Inject(saveConfig)
                 .Inject(viewController);
 
 
@@ -50,7 +52,8 @@ namespace Game
             var systems = new EcsSystems(world);
 
             systems
-                .Add(new CreateBusinessesSystem());
+                .Add(new CreateBusinessesSystem())
+                .Add(new SaveLoadSystem());
 
             return systems;
         }
