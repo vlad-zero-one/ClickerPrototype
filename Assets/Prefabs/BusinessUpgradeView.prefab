@@ -680,7 +680,7 @@ MonoBehaviour:
   factor: {fileID: 1735834148696194815}
   factorFormat: +{0}%
   price: {fileID: 1735834149132504621}
-  priceFormat: '{0]$'
+  priceFormat: '{0}$'
   priceContainer: {fileID: 1735834149603808354}
   boughtContainer: {fileID: 1735834150073892200}
 --- !u!1 &1735834149850880196

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,13 +21,6 @@ namespace Game.View
 
         private void Start()
         {
-            var conf = new Configs.BusinessUpgradeData();
-            conf.Price = 1;
-            conf.Factor = 0.5f;
-
-            var bu = new BusinessUpgrade(conf, "New Name");
-
-            firstUpgrade.Init(bu);
             firstUpgrade.OnClick += () => Debug.LogError("!");
         }
 
@@ -42,13 +33,6 @@ namespace Game.View
 
             firstUpgrade.Init(business.firstUpgrade);
             secondUpgrade.Init(business.secondUpgrade);
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-            }
         }
     }
 }

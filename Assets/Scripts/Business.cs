@@ -24,5 +24,10 @@ namespace Game
         public double Income => Level * data.BaseIncome * (1 + firstUpgrade.Factor + secondUpgrade.Factor);
         public float IncomeTime => data.IncomeTime;
         public double LevelUpPrice => (Level + 1) * data.BaseLevelUpPrice;
+
+        public void LevelUp()
+        {
+            ++Level;
+        }
     }
 }
