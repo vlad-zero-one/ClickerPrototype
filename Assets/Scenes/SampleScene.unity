@@ -694,6 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   businessesConfig: {fileID: 11400000, guid: 05b7816c69758774588824d44a2ab0a9, type: 2}
   namesConfig: {fileID: 11400000, guid: 9f3f1ff5ac0bcc341a18a2f66f6c10b4, type: 2}
+  saveConfig: {fileID: 11400000, guid: d8343fc5b3fe3fa47b3b9020830b04f3, type: 2}
   viewController: {fileID: 1202589978}
 --- !u!4 &1353626272
 Transform:
