@@ -19,20 +19,44 @@ namespace Game.View
         [Space]
         [SerializeField] private string priceFormat;
 
+        private Business business;
+
+        public delegate void Click(Business business);
+        public event Click OnLevelUpClick;
+
+        public void Init(Business business)
+        {
+            this.business = business;
+
+            UpdateView();
+
+            firstUpgrade.Init(business.firstUpgrade);
+            secondUpgrade.Init(business.secondUpgrade);
+
+            levelUpButton.onClick.AddListener(InvokeClick);
+        }
+
+        public void UpdateView()
+        {
+            businessName.text = business.Name;
+            levelText.text = business.Level.ToString();
+            incomeText.text = string.Format(priceFormat, business.Income);
+            levelUpPrice.text = string.Format(priceFormat, business.LevelUpPrice);
+        }
+
         private void Start()
         {
             firstUpgrade.OnClick += () => Debug.LogError("!");
         }
 
-        public void Init(Business business)
+        private void InvokeClick()
         {
-            businessName.SetText(business.Name);
-            levelText.SetText(business.Level.ToString());
-            incomeText.SetText(priceFormat, (float)business.Income);
-            levelUpPrice.SetText(priceFormat, (float)business.LevelUpPrice);
+            OnLevelUpClick?.Invoke(business);
+        }
 
-            firstUpgrade.Init(business.firstUpgrade);
-            secondUpgrade.Init(business.secondUpgrade);
+        private void OnDestroy()
+        {
+            levelUpButton.onClick.RemoveListener(InvokeClick);
         }
     }
 }

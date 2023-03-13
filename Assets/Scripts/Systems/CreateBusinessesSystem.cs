@@ -7,11 +7,11 @@ namespace Game.Systems
 {
     public class CreateBusinessesSystem : IEcsInitSystem
     {
-        private readonly EcsWorld ecsWorld;
-
         private readonly BusinessesConfig businessesConfig;
         private readonly NamesConfig namesConfig;
-        
+
+        private readonly BusinessesManager businessesManager;
+
         public void Init()
         {
             foreach(var businessData in businessesConfig.Values)
@@ -26,10 +26,7 @@ namespace Game.Systems
                     business.LevelUp();
                 }
 
-                var entity = ecsWorld.NewEntity();
-
-                ref var comp = ref entity.Get<CreateBusinessViewComponent>();
-                comp.Business = business;
+                businessesManager.AddBusiness(business);
             }
         }
     }

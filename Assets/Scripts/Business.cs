@@ -21,9 +21,11 @@ namespace Game
 
         public string Name => namesData.BusinessName;
         public int Level { get; private set; }
-        public double Income => Level * data.BaseIncome * (1 + firstUpgrade.Factor + secondUpgrade.Factor);
+        public double Income => Level * data.BaseIncome * (1 + factors);
         public float IncomeTime => data.IncomeTime;
         public double LevelUpPrice => (Level + 1) * data.BaseLevelUpPrice;
+
+        private double factors => (firstUpgrade.Bought ? firstUpgrade.Factor : 0) + (secondUpgrade.Bought ? secondUpgrade.Factor : 0);
 
         public void LevelUp()
         {

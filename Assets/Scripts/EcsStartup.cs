@@ -14,6 +14,7 @@ namespace Game
         [SerializeField] private NamesConfig namesConfig;
         [SerializeField] private SaveConfig saveConfig;
         [Header("Scene Objects")]
+        [SerializeField] private BalanceView balanceView;
         [SerializeField] private BusinessViewController viewController;
 
 
@@ -35,13 +36,15 @@ namespace Game
                 .Add(CreateSystems())
                 .Add(CreateViewSystems())
 
-                //.OneFrame<CreateBusinessViewComponent>()
+                .OneFrame<UpdateBalanceComponent>()
                 // .OneFrame<TestComponent2> ()
 
                 .Inject(businessesConfig)
                 .Inject(namesConfig)
                 .Inject(saveConfig)
-                .Inject(viewController);
+                .Inject(balanceView)
+                .Inject(viewController)
+                .Inject(new BusinessesManager());
 
 
             systems.Init();
@@ -53,7 +56,8 @@ namespace Game
 
             systems
                 .Add(new CreateBusinessesSystem())
-                .Add(new SaveLoadSystem());
+                .Add(new SaveLoadSystem())
+                .Add(new LevelUpSystem());
 
             return systems;
         }
@@ -63,7 +67,9 @@ namespace Game
             var systems = new EcsSystems(world);
 
             systems
-                .Add(new CreateBusinessViewsSystem());
+                .Add(new CreateBusinessViewsSystem())
+                .Add(new UpdateBalanceViewSystem())
+                .Add(new UpdateBusinessViewSystem());
 
             return systems;
         }
