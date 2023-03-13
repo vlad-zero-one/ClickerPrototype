@@ -1,4 +1,5 @@
 using Game.Configs;
+using Game.Save;
 
 namespace Game
 {
@@ -19,6 +20,14 @@ namespace Game
             secondUpgrade = new(data.SecondUpgradeData, namesData.SecondUpgradeName);
         }
 
+        public void FromLoad(SaveDataBusiness saveData)
+        {
+            Level = saveData.Level;
+            if (saveData.FirstUpgradeBought) firstUpgrade.Buy();
+            if (saveData.SecondUpgradeBought) secondUpgrade.Buy();
+        }
+
+        public string Id => data.Id;
         public string Name => namesData.BusinessName;
         public int Level { get; private set; }
         public double Income => Level * data.BaseIncome * (1 + factors);

@@ -23,7 +23,7 @@ namespace Game.Systems
                     if (business.Level == 1)
                     {
                         var startProgressEntity = ecsWorld.NewEntity();
-                        startProgressEntity.Get<StartProgressComponent>();
+                        startProgressEntity.Get<ProgressComponent>();
                         startProgressEntity.Get<BusinessComponent>().Business = business;
                     }
 

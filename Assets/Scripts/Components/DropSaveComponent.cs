@@ -1,6 +1,6 @@
 namespace Game.Components
 {
-    public struct StartProgressComponent
+    public struct DropSaveComponent
     {
 
     }

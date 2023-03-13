@@ -8,11 +8,6 @@ namespace Game.View
         [SerializeField] private TextMeshProUGUI balanceValue;
         [SerializeField] private string format;
 
-        private void Start()
-        {
-            SetValue(999);
-        }
-
         public void SetValue(double value)
         {
             balanceValue.text = string.Format(format, value);

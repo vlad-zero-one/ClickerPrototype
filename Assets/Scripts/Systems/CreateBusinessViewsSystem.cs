@@ -11,7 +11,7 @@ namespace Game.Systems
         
         public void Init()
         {
-            foreach (var business in businessesManager.Businesses)
+            foreach (var business in businessesManager.Businesses.Values)
             {
                 businessViewController.Instantiate(business);
             }

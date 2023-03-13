@@ -9,6 +9,11 @@ namespace Game.Save
         public double Balance;
 
         public List<SaveDataBusiness> Bisunesses;
+
+        public SaveData()
+        {
+            Bisunesses = new();
+        }
     }
 
     [Serializable]
@@ -19,5 +24,14 @@ namespace Game.Save
         public float Progress;
         public bool FirstUpgradeBought;
         public bool SecondUpgradeBought;
+
+        public SaveDataBusiness(Business business, float progress)
+        {
+            Id = business.Id;
+            Level = business.Level;
+            Progress = progress;
+            FirstUpgradeBought = business.firstUpgrade.Bought;
+            SecondUpgradeBought = business.secondUpgrade.Bought;
+        }
     }
 }

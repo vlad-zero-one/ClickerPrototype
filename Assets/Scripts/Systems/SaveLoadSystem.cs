@@ -17,11 +17,21 @@ namespace Game.Systems
 
         private readonly BusinessesManager businessesManager;
 
+        private readonly EcsFilter<BusinessComponent, ProgressComponent> progressFilter;
+
+        private readonly EcsFilter<DropSaveComponent> dropSaveFilter;
+
+
         private string saveFilePath;
 
         public void Init()
         {
             saveFilePath = $"{Application.persistentDataPath}/{saveConfig.SaveFileName}";
+
+            if (File.Exists(saveFilePath))
+            {
+                LoadGame();
+            }
 
             Application.quitting += SaveGame;
         }
@@ -31,40 +41,64 @@ namespace Game.Systems
             Application.quitting -= SaveGame;
         }
 
-        void SaveGame()
+        private void SaveGame()
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(saveFilePath);
             SaveData data = new SaveData();
 
             data.Balance = businessesManager.Balance;
+            foreach(var i in progressFilter)
+            {
+                var business = progressFilter.Get1(i).Business;
+                var progress = progressFilter.Get2(i).Progress;
+
+                data.Bisunesses.Add(new SaveDataBusiness(business, progress));
+            }
 
             bf.Serialize(file, data);
             file.Close();
             Debug.Log("Game data saved!");
         }
 
-        void LoadGame()
+        private void LoadGame()
         {
-            if (File.Exists(saveFilePath))
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(saveFilePath, FileMode.Open);
-                SaveData data = (SaveData)bf.Deserialize(file);
-                file.Close();
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(saveFilePath, FileMode.Open);
+            SaveData data = (SaveData)bf.Deserialize(file);
+            file.Close();
 
-                businessesManager.SetMoney(data.Balance);
+            businessesManager.SetMoney(data.Balance);
+            ecsWorld.NewEntity().Get<UpdateBalanceComponent>();
 
-                Debug.Log("Game data loaded!");
-            }
-            else
+            foreach (var businessData in data.Bisunesses)
             {
-                Debug.LogError("There is no save data!");
+                if (businessesManager.LoadBusiness(businessData))
+                {
+                    var progressEntity = ecsWorld.NewEntity();
+                    progressEntity.Get<BusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
+                    progressEntity.Get<ProgressComponent>().Progress = businessData.Progress;
+                    progressEntity.Get<UpdateBusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
+                }
             }
+
+            Debug.Log("Game data loaded!");
         }
 
         public void Run()
         {
+            foreach (var i in dropSaveFilter)
+            {
+                dropSaveFilter.GetEntity(i).Del<DropSaveComponent>();
+
+                if (File.Exists(saveFilePath))
+                {
+                    File.Delete(saveFilePath);
+
+                    Application.quitting -= SaveGame;
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.L))
             {
                 LoadGame();

@@ -1,6 +1,5 @@
-using System.Collections;
+using Game.Save;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Game
 {
@@ -8,15 +7,27 @@ namespace Game
     {
         private double balance;
 
-        private List<Business> businesses = new();
+        private Dictionary<string, Business> businesses = new();
 
         public double Balance => balance;
 
-        public List<Business> Businesses => businesses;
+        public Dictionary<string, Business> Businesses => businesses;
 
         public void AddBusiness(Business business)
         {
-            businesses.Add(business);
+            businesses.Add(business.Id, business);
+        }
+
+        public bool LoadBusiness(SaveDataBusiness saveData)
+        {
+            if (businesses.TryGetValue(saveData.Id, out var business))
+            {
+                business.FromLoad(saveData);
+
+                return true;
+            }
+
+            return false;
         }
 
         public void AddMoney(double amount)
@@ -45,7 +56,7 @@ namespace Game
         public bool BuyUpgrade(Business business, BusinessUpgrade businessUpgrade)
         {
             var price = businessUpgrade.Price;
-            if (balance >= price)
+            if (business.Level > 0 && balance >= price)
             {
                 SetMoney(balance - price);
                 businessUpgrade.Buy();

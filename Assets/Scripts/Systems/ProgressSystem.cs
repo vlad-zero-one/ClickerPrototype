@@ -8,19 +8,10 @@ namespace Game.Systems
     {
         private readonly EcsWorld ecsWorld;
 
-        private readonly EcsFilter<BusinessComponent, StartProgressComponent> startProgressFilter;
         private readonly EcsFilter<BusinessComponent, ProgressComponent> progressFilter;
 
         public void Run()
         {
-            foreach (var i in startProgressFilter)
-            {
-                ref var entity = ref startProgressFilter.GetEntity(i);
-
-                entity.Del<StartProgressComponent>();
-                entity.Get<ProgressComponent>().Progress = 0;
-            }
-
             foreach (var i in progressFilter)
             {
                 var business = progressFilter.Get1(i).Business;

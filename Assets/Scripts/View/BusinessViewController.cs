@@ -61,17 +61,12 @@ namespace Game.View
 
         private void OnLevelUpViewClick(Business business)
         {
-            var entity = ecsWorld.NewEntity();
-
-            ref var comp = ref entity.Get<LevelUpClickComponent>();
-            comp.Business = business;
+            ecsWorld.NewEntity().Get<LevelUpClickComponent>().Business = business;
         }
 
         private void OnBuyUpgradeClick(Business business, BusinessUpgrade businessUpgrade)
         {
-            var entity = ecsWorld.NewEntity();
-
-            ref var comp = ref entity.Get<BuyUpgradeClickComponent>();
+            ref var comp = ref ecsWorld.NewEntity().Get<BuyUpgradeClickComponent>();
             comp.Business = business;
             comp.BusinessUpgrade = businessUpgrade;
         }
@@ -81,6 +76,7 @@ namespace Game.View
             foreach (var view in businessViews.Values)
             {
                 view.OnLevelUpClick -= OnLevelUpViewClick;
+                view.OnBuyUpgradeClick -= OnBuyUpgradeClick;
             }
         }
     }
