@@ -20,6 +20,11 @@ namespace Game.View
             exitButton.onClick.AddListener(Exit);
         }
 
+        public void Switch()
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+        }
+
         private void Exit()
         {
             Application.Quit();
@@ -29,11 +34,6 @@ namespace Game.View
         {
             ecsWorld.NewEntity().Get<DropSaveComponent>();
             Switch();
-        }
-
-        public void Switch()
-        {
-            gameObject.SetActive(!gameObject.activeSelf);
         }
     }
 }

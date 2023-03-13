@@ -18,7 +18,6 @@ namespace Game
         [SerializeField] private BusinessViewController viewController;
         [SerializeField] private Menu menu;
 
-
         private EcsWorld world;
         private EcsSystems systems;
 
