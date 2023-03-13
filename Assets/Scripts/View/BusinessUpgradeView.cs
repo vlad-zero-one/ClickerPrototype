@@ -37,16 +37,16 @@ namespace Game.View
             if (!businessUpgrade.Bought)
             {
                 upgradeName.text = businessUpgrade.Name;
-                factor.text = string.Format(factorFormat, businessUpgrade.Factor);
+                factor.text = string.Format(factorFormat, businessUpgrade.Factor * 100);
                 price.text = string.Format(priceFormat, businessUpgrade.Price);
-
-                priceContainer.SetActive(!businessUpgrade.Bought);
-                boughtContainer.SetActive(businessUpgrade.Bought);
             }
             else
             {
                 button.onClick.RemoveListener(InvokeClick);
             }
+
+            priceContainer.SetActive(!businessUpgrade.Bought);
+            boughtContainer.SetActive(businessUpgrade.Bought);
         }
 
         private void InvokeClick()
