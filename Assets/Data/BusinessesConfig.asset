@@ -33,4 +33,34 @@ MonoBehaviour:
     SecondUpgradeData:
       Price: 4000
       Factor: 2
+  - Id: 3
+    IncomeTime: 10
+    BaseLevelUpPrice: 200
+    BaseIncome: 200
+    FirstUpgradeData:
+      Price: 6000
+      Factor: 1
+    SecondUpgradeData:
+      Price: 20000
+      Factor: 1.5
+  - Id: 4
+    IncomeTime: 17
+    BaseLevelUpPrice: 1000
+    BaseIncome: 1000
+    FirstUpgradeData:
+      Price: 15000
+      Factor: 1
+    SecondUpgradeData:
+      Price: 50000
+      Factor: 2
+  - Id: 5
+    IncomeTime: 30
+    BaseLevelUpPrice: 5000
+    BaseIncome: 5000
+    FirstUpgradeData:
+      Price: 100000
+      Factor: 2
+    SecondUpgradeData:
+      Price: 500000
+      Factor: 4
   InitialBusinessId: 1
