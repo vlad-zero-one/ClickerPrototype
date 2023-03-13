@@ -4,19 +4,6 @@ using System.Collections.Generic;
 namespace Game.Save
 {
     [Serializable]
-    public class SaveData
-    {
-        public double Balance;
-
-        public List<SaveDataBusiness> Bisunesses;
-
-        public SaveData()
-        {
-            Bisunesses = new();
-        }
-    }
-
-    [Serializable]
     public class SaveDataBusiness
     {
         public string Id;
