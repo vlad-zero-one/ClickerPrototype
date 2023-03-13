@@ -57,7 +57,8 @@ namespace Game
             systems
                 .Add(new CreateBusinessesSystem())
                 .Add(new SaveLoadSystem())
-                .Add(new LevelUpSystem());
+                .Add(new LevelUpSystem())
+                .Add(new BuyUpgradeSystem());
 
             return systems;
         }
@@ -67,6 +68,7 @@ namespace Game
             var systems = new EcsSystems(world);
 
             systems
+                .Add(new InitBusinessViewsControllerSystem())
                 .Add(new CreateBusinessViewsSystem())
                 .Add(new UpdateBalanceViewSystem())
                 .Add(new UpdateBusinessViewSystem());

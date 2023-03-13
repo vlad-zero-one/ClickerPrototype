@@ -1,8 +1,5 @@
-using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.View
@@ -23,29 +20,38 @@ namespace Game.View
 
         private BusinessUpgrade businessUpgrade;
 
-        public delegate void Click();
+        public delegate void Click(BusinessUpgrade businessUpgrade);
         public event Click OnClick;
 
         public void Init(BusinessUpgrade businessUpgrade)
         {
             this.businessUpgrade = businessUpgrade;
 
-            upgradeName.text = businessUpgrade.Name;
-            factor.text = string.Format(factorFormat, businessUpgrade.Factor);
-            price.text = string.Format(priceFormat, businessUpgrade.Price);
+            UpdateView();
 
             button.onClick.AddListener(InvokeClick);
         }
 
-        public void Buy()
+        public void UpdateView()
         {
-            priceContainer.SetActive(false);
-            boughtContainer.SetActive(true);
+            if (!businessUpgrade.Bought)
+            {
+                upgradeName.text = businessUpgrade.Name;
+                factor.text = string.Format(factorFormat, businessUpgrade.Factor);
+                price.text = string.Format(priceFormat, businessUpgrade.Price);
+
+                priceContainer.SetActive(!businessUpgrade.Bought);
+                boughtContainer.SetActive(businessUpgrade.Bought);
+            }
+            else
+            {
+                button.onClick.RemoveListener(InvokeClick);
+            }
         }
 
         private void InvokeClick()
         {
-            OnClick?.Invoke();
+            OnClick?.Invoke(businessUpgrade);
         }
 
         private void OnDestroy()

@@ -41,5 +41,19 @@ namespace Game
 
             return false;
         }
+
+        public bool BuyUpgrade(Business business, BusinessUpgrade businessUpgrade)
+        {
+            var price = businessUpgrade.Price;
+            if (balance >= price)
+            {
+                SetMoney(balance - price);
+                businessUpgrade.Buy();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

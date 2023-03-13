@@ -1,7 +1,6 @@
 using Game.Components;
 using Leopotam.Ecs;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +38,9 @@ namespace Game.View
             businessViews.Add(business, view);
 
             view.OnLevelUpClick += OnLevelUpViewClick;
+
+            view.OnBuyUpgradeClick += OnBuyUpgradeClick;
+
         }
 
         public void UpdateView(Business business)
@@ -55,6 +57,15 @@ namespace Game.View
 
             ref var comp = ref entity.Get<LevelUpClickComponent>();
             comp.Business = business;
+        }
+
+        private void OnBuyUpgradeClick(Business business, BusinessUpgrade businessUpgrade)
+        {
+            var entity = ecsWorld.NewEntity();
+
+            ref var comp = ref entity.Get<BuyUpgradeClickComponent>();
+            comp.Business = business;
+            comp.BusinessUpgrade = businessUpgrade;
         }
 
         private void OnDestroy()

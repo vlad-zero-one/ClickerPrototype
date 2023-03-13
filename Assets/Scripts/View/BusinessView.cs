@@ -21,19 +21,24 @@ namespace Game.View
 
         private Business business;
 
-        public delegate void Click(Business business);
-        public event Click OnLevelUpClick;
+        public delegate void LevelUpClick(Business business);
+        public delegate void UpgradeClick(Business business, BusinessUpgrade businessUpgrade);
+
+        public event LevelUpClick OnLevelUpClick;
+        public event UpgradeClick OnBuyUpgradeClick;
 
         public void Init(Business business)
         {
             this.business = business;
 
-            UpdateView();
-
             firstUpgrade.Init(business.firstUpgrade);
             secondUpgrade.Init(business.secondUpgrade);
 
+            UpdateView();
+
             levelUpButton.onClick.AddListener(InvokeClick);
+            firstUpgrade.OnClick += BuyUpgrade;
+            secondUpgrade.OnClick += BuyUpgrade;
         }
 
         public void UpdateView()
@@ -42,11 +47,14 @@ namespace Game.View
             levelText.text = business.Level.ToString();
             incomeText.text = string.Format(priceFormat, business.Income);
             levelUpPrice.text = string.Format(priceFormat, business.LevelUpPrice);
+
+            firstUpgrade.UpdateView();
+            secondUpgrade.UpdateView();
         }
 
-        private void Start()
+        private void BuyUpgrade(BusinessUpgrade businessUpgrade)
         {
-            firstUpgrade.OnClick += () => Debug.LogError("!");
+            OnBuyUpgradeClick?.Invoke(business, businessUpgrade);
         }
 
         private void InvokeClick()
@@ -57,6 +65,8 @@ namespace Game.View
         private void OnDestroy()
         {
             levelUpButton.onClick.RemoveListener(InvokeClick);
+            firstUpgrade.OnClick -= BuyUpgrade;
+            secondUpgrade.OnClick -= BuyUpgrade;
         }
     }
 }

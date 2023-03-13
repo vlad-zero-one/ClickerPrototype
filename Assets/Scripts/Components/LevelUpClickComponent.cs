@@ -1,5 +1,3 @@
-using Game.View;
-
 namespace Game.Components
 {
     public struct LevelUpClickComponent 
