@@ -1,13 +1,12 @@
 using Game.Components;
 using Leopotam.Ecs;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.View
 {
-    public class BusinessViewController : MonoBehaviour
+    public class BusinessViewsController : MonoBehaviour
     {
         [SerializeField] private BusinessView businessViewPrefab;
         [SerializeField] private RectTransform scrollViewContent;

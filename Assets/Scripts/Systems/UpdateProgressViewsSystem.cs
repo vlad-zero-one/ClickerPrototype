@@ -6,7 +6,7 @@ namespace Game.Systems
 {
     public class UpdateProgressViewsSystem : IEcsRunSystem
     {
-        private readonly BusinessViewController businessViewController;
+        private readonly BusinessViewsController businessViewsController;
 
         private readonly EcsFilter<BusinessComponent, ProgressComponent> filter;
         
@@ -14,7 +14,7 @@ namespace Game.Systems
         {
             foreach (var i in filter)
             {
-                businessViewController.SetProgress(filter.Get1(i).Business, filter.Get2(i).Progress);
+                businessViewsController.SetProgress(filter.Get1(i).Business, filter.Get2(i).Progress);
             }
         }
     }

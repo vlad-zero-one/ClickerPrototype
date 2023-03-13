@@ -15,7 +15,7 @@ namespace Game
         [SerializeField] private SaveConfig saveConfig;
         [Header("Scene Objects")]
         [SerializeField] private BalanceView balanceView;
-        [SerializeField] private BusinessViewController viewController;
+        [SerializeField] private BusinessViewsController viewsController;
         [SerializeField] private Menu menu;
 
         private EcsWorld world;
@@ -42,7 +42,7 @@ namespace Game
                 .Inject(namesConfig)
                 .Inject(saveConfig)
                 .Inject(balanceView)
-                .Inject(viewController)
+                .Inject(viewsController)
                 .Inject(menu)
                 .Inject(new BusinessesManager());
 

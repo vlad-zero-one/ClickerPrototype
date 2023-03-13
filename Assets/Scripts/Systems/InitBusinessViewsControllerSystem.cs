@@ -7,11 +7,11 @@ namespace Game.Systems
     {
         private readonly EcsWorld ecsWorld;
 
-        private readonly BusinessViewController businessViewController;
+        private readonly BusinessViewsController businessViewsController;
         
         public void Init()
         {
-            businessViewController.Init(ecsWorld);
+            businessViewsController.Init(ecsWorld);
         }
     }
 }

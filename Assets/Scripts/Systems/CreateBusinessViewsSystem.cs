@@ -5,7 +5,7 @@ namespace Game.Systems
 {
     public class CreateBusinessViewsSystem : IEcsInitSystem
     {
-        private readonly BusinessViewController businessViewController;
+        private readonly BusinessViewsController businessViewsController;
 
         private readonly BusinessesManager businessesManager;
         
@@ -13,7 +13,7 @@ namespace Game.Systems
         {
             foreach (var business in businessesManager.Businesses.Values)
             {
-                businessViewController.Instantiate(business);
+                businessViewsController.Instantiate(business);
             }
         }
     }

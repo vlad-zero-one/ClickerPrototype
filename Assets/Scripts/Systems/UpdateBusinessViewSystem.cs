@@ -6,7 +6,7 @@ namespace Game.Systems
 {
     public class UpdateBusinessViewSystem : IEcsRunSystem
     {
-        private readonly BusinessViewController businessViewController;
+        private readonly BusinessViewsController businessViewController;
 
         private readonly EcsFilter<UpdateBusinessComponent> filter;
         
