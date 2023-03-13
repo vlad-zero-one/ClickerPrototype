@@ -10,7 +10,7 @@ namespace Game.Systems
 
         private readonly EcsFilter<UpdateBusinessComponent> filter;
         
-        public void Run ()
+        public void Run()
         {
             foreach(var i in filter)
             {

@@ -52,6 +52,11 @@ namespace Game.View
             secondUpgrade.UpdateView();
         }
 
+        public void SetProgress(float progress)
+        {
+            progressBar.value = progress / business.IncomeTime;
+        }
+
         private void BuyUpgrade(BusinessUpgrade businessUpgrade)
         {
             OnBuyUpgradeClick?.Invoke(business, businessUpgrade);

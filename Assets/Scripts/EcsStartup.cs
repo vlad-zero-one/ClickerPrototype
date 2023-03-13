@@ -58,7 +58,9 @@ namespace Game
                 .Add(new CreateBusinessesSystem())
                 .Add(new SaveLoadSystem())
                 .Add(new LevelUpSystem())
-                .Add(new BuyUpgradeSystem());
+                .Add(new BuyUpgradeSystem())
+                .Add(new ProgressSystem())
+                .Add(new IncomeSystem());
 
             return systems;
         }
@@ -71,7 +73,8 @@ namespace Game
                 .Add(new InitBusinessViewsControllerSystem())
                 .Add(new CreateBusinessViewsSystem())
                 .Add(new UpdateBalanceViewSystem())
-                .Add(new UpdateBusinessViewSystem());
+                .Add(new UpdateBusinessViewSystem())
+                .Add(new UpdateProgressViewsSystem());
 
             return systems;
         }

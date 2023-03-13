@@ -9,7 +9,7 @@ namespace Game.Systems
 
         private readonly EcsFilter<BuyUpgradeClickComponent> filter;
         
-        public void Run ()
+        public void Run()
         {
             foreach(var i in filter)
             {

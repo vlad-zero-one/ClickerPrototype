@@ -51,6 +51,14 @@ namespace Game.View
             }
         }
 
+        public void SetProgress(Business business, float progress)
+        {
+            if (businessViews.ContainsKey(business))
+            {
+                businessViews[business].SetProgress(progress);
+            }
+        }
+
         private void OnLevelUpViewClick(Business business)
         {
             var entity = ecsWorld.NewEntity();
