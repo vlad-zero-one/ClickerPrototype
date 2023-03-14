@@ -5,7 +5,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using Game.Configs;
 using Game.Components;
-using System.Collections.Generic;
 
 namespace Game.Systems
 {
@@ -33,17 +32,40 @@ namespace Game.Systems
                 LoadGame();
             }
 
+            Application.focusChanged += SaveGame;
             Application.quitting += SaveGame;
+        }
+
+        public void Run()
+        {
+            foreach (var i in dropSaveFilter)
+            {
+                dropSaveFilter.GetEntity(i).Del<DropSaveComponent>();
+
+                if (File.Exists(saveFilePath))
+                {
+                    File.Delete(saveFilePath);
+
+                    Application.focusChanged -= SaveGame;
+                    Application.quitting -= SaveGame;
+                }
+            }
         }
 
         public void Destroy()
         {
+            Application.focusChanged -= SaveGame;
             Application.quitting -= SaveGame;
+        }
+
+        private void SaveGame(bool focus)
+        {
+            if (!focus) SaveGame();
         }
 
         private void SaveGame()
         {
-            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter formatter = new BinaryFormatter();
             FileStream file = File.Create(saveFilePath);
             SaveData data = new SaveData();
 
@@ -56,16 +78,19 @@ namespace Game.Systems
                 data.Bisunesses.Add(new SaveDataBusiness(business, progress));
             }
 
-            bf.Serialize(file, data);
+            formatter.Serialize(file, data);
             file.Close();
+
+#if UNITY_EDITOR
             Debug.Log("Game data saved!");
+#endif
         }
 
         private void LoadGame()
         {
-            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter formatter = new BinaryFormatter();
             FileStream file = File.Open(saveFilePath, FileMode.Open);
-            SaveData data = (SaveData)bf.Deserialize(file);
+            SaveData data = (SaveData)formatter.Deserialize(file);
             file.Close();
 
             businessesManager.SetMoney(data.Balance);
@@ -82,39 +107,9 @@ namespace Game.Systems
                 }
             }
 
+#if UNITY_EDITOR
             Debug.Log("Game data loaded!");
-        }
-
-        public void Run()
-        {
-            foreach (var i in dropSaveFilter)
-            {
-                dropSaveFilter.GetEntity(i).Del<DropSaveComponent>();
-
-                if (File.Exists(saveFilePath))
-                {
-                    File.Delete(saveFilePath);
-
-                    Application.quitting -= SaveGame;
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                LoadGame();
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                SaveGame();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                businessesManager.AddMoney(10);
-                var ent = ecsWorld.NewEntity();
-                ent.Get<UpdateBalanceComponent>();
-            }
+#endif
         }
     }
 }
