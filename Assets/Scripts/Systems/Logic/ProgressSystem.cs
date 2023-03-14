@@ -19,11 +19,12 @@ namespace Game.Systems
 
                 progress.Progress += Time.deltaTime;
 
-                if (progress.Progress >= business.IncomeTime)
+                var delta = progress.Progress - business.IncomeTime;
+
+                if (delta >= 0)
                 {
-                    var entity = ecsWorld.NewEntity();
-                    entity.Get<IncomeComponent>().Income = business.Income;
-                    progress.Progress = 0;
+                    ecsWorld.NewEntity().Get<IncomeComponent>().Income = business.Income;
+                    progress.Progress = delta;
                 }
             }
         }
