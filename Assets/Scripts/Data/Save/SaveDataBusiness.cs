@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Game.Save
 {
@@ -17,8 +16,8 @@ namespace Game.Save
             Id = business.Id;
             Level = business.Level;
             Progress = progress;
-            FirstUpgradeBought = business.firstUpgrade.Bought;
-            SecondUpgradeBought = business.secondUpgrade.Bought;
+            FirstUpgradeBought = business.FirstUpgrade.Bought;
+            SecondUpgradeBought = business.SecondUpgrade.Bought;
         }
     }
 }

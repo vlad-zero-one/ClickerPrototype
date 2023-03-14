@@ -18,7 +18,7 @@ namespace Game.View
 
         private Dictionary<Business, BusinessView> businessViews = new();
 
-        private float contentSpacing => contentVerticalLayoutGroup.spacing;
+        private float ContentSpacing => contentVerticalLayoutGroup.spacing;
 
         public void Init(EcsWorld ecsWorld)
         {
@@ -31,7 +31,7 @@ namespace Game.View
         {
             var view = Instantiate(businessViewPrefab, scrollViewContent);
 
-            scrollViewContent.sizeDelta += new Vector2(0, prefabYSize + contentSpacing);
+            scrollViewContent.sizeDelta += new Vector2(0, prefabYSize + ContentSpacing);
 
             view.Init(business);
             businessViews.Add(business, view);

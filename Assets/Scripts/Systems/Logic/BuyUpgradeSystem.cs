@@ -21,8 +21,7 @@ namespace Game.Systems
 
                 if (businessesManager.BuyUpgrade(business, upgrade))
                 {
-                    ref var updateComp = ref entity.Get<UpdateBusinessComponent>();
-                    updateComp.Business = business;
+                    entity.Get<UpdateBusinessComponent>().Business = business;
 
                     entity.Get<UpdateBalanceComponent>();
                 }

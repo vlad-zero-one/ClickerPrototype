@@ -5,29 +5,27 @@ namespace Game
 {
     public class Business
     {
-        public BusinessUpgrade firstUpgrade;
-        public BusinessUpgrade secondUpgrade;
+        public readonly BusinessUpgrade FirstUpgrade;
+        public readonly BusinessUpgrade SecondUpgrade;
 
-        private BusinessData data;
-        private BusinessNamesData namesData;
+        private readonly BusinessData data;
+        private readonly BusinessNamesData namesData;
 
         public Business(BusinessData data, BusinessNamesData namesData)
         {
             this.data = data;
             this.namesData = namesData;
 
-            firstUpgrade = new(data.FirstUpgradeData, namesData.FirstUpgradeName);
-            secondUpgrade = new(data.SecondUpgradeData, namesData.SecondUpgradeName);
+            FirstUpgrade = new(data.FirstUpgradeData, namesData.FirstUpgradeName);
+            SecondUpgrade = new(data.SecondUpgradeData, namesData.SecondUpgradeName);
         }
 
         public string Id => data.Id;
         public string Name => namesData.BusinessName;
-        public double Income => Level * data.BaseIncome * (1 + factors);
+        public double Income => Level * data.BaseIncome * (1 + Factors());
         public float IncomeTime => data.IncomeTime;
         public double LevelUpPrice => (Level + 1) * data.BaseLevelUpPrice;
         public int Level { get; private set; }
-
-        private double factors => (firstUpgrade.Bought ? firstUpgrade.Factor : 0) + (secondUpgrade.Bought ? secondUpgrade.Factor : 0);
 
         public void LevelUp()
         {
@@ -37,8 +35,13 @@ namespace Game
         public void FromLoad(SaveDataBusiness saveData)
         {
             Level = saveData.Level;
-            if (saveData.FirstUpgradeBought) firstUpgrade.Buy();
-            if (saveData.SecondUpgradeBought) secondUpgrade.Buy();
+            if (saveData.FirstUpgradeBought) FirstUpgrade.Buy();
+            if (saveData.SecondUpgradeBought) SecondUpgrade.Buy();
+        }
+
+        private double Factors()
+        {
+            return (FirstUpgrade.Bought ? FirstUpgrade.Factor : 0) + (SecondUpgrade.Bought ? SecondUpgrade.Factor : 0);
         }
     }
 }

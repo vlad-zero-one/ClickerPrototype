@@ -1,6 +1,5 @@
 using Leopotam.Ecs;
 using Game.Configs;
-using System.Linq;
 using Game.Components;
 
 namespace Game.Systems

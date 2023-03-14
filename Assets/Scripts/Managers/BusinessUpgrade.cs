@@ -4,8 +4,8 @@ namespace Game
 {
     public class BusinessUpgrade
     {
-        private BusinessUpgradeData data;
-        private string name;
+        private readonly BusinessUpgradeData data;
+        private readonly string name;
 
         public BusinessUpgrade(BusinessUpgradeData data, string name)
         {

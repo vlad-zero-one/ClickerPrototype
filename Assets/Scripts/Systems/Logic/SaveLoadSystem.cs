@@ -20,7 +20,6 @@ namespace Game.Systems
 
         private readonly EcsFilter<DropSaveComponent> dropSaveFilter;
 
-
         private string saveFilePath;
 
         public void Init()

@@ -31,8 +31,8 @@ namespace Game.View
         {
             this.business = business;
 
-            firstUpgrade.Init(business.firstUpgrade);
-            secondUpgrade.Init(business.secondUpgrade);
+            firstUpgrade.Init(business.FirstUpgrade);
+            secondUpgrade.Init(business.SecondUpgrade);
 
             UpdateView();
 
