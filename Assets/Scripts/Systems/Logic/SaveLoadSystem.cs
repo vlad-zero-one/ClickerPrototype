@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using Game.Configs;
 using Game.Components;
+using System.Collections.Generic;
 
 namespace Game.Systems
 {
@@ -19,6 +20,8 @@ namespace Game.Systems
         private readonly EcsFilter<BusinessComponent, ProgressComponent> progressFilter;
 
         private readonly EcsFilter<DropSaveComponent> dropSaveFilter;
+
+        private readonly EcsFilter<NewBusinessComponent> newBusinessesFilter;
 
         private string saveFilePath;
 
@@ -95,14 +98,32 @@ namespace Game.Systems
             businessesManager.SetMoney(data.Balance);
             ecsWorld.NewEntity().Get<UpdateBalanceComponent>();
 
+            var businessLoadData = new Dictionary<string, SaveDataBusiness>();
+
             foreach (var businessData in data.Bisunesses)
             {
+                businessLoadData.Add(businessData.Id, businessData);
+
                 if (businessesManager.LoadBusiness(businessData))
                 {
                     var progressEntity = ecsWorld.NewEntity();
                     progressEntity.Get<BusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
                     progressEntity.Get<ProgressComponent>().Progress = businessData.Progress;
                     progressEntity.Get<UpdateBusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
+                }
+            }
+
+            foreach(var i in newBusinessesFilter)
+            {
+                ref var entity = ref newBusinessesFilter.GetEntity(i);
+                ref var businessComponent = ref newBusinessesFilter.Get1(i);
+
+                if (businessLoadData.TryGetValue(businessComponent.Id, out var businessData))
+                {
+                    businessComponent.FromLoad(businessData);
+
+                    entity.Get<ProgressComponent>().Progress = businessData.Progress;
+                    //entity.Get<NewUpdateBusinessComponent>();
                 }
             }
 

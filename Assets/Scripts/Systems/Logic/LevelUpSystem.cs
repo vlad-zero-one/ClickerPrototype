@@ -10,10 +10,10 @@ namespace Game.Systems
         private readonly BusinessesManager businessesManager;
 
         private readonly EcsFilter<LevelUpClickComponent> filter;
-        
+
         public void Run()
         {
-            foreach(var i in filter)
+            foreach (var i in filter)
             {
                 var business = filter.Get1(i).Business;
                 ref var levelUpEntity = ref filter.GetEntity(i);

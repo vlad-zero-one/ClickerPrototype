@@ -18,6 +18,8 @@ namespace Game.View
 
         private Dictionary<Business, BusinessView> businessViews = new();
 
+        private Dictionary<string, BusinessView> newBusinessViews = new();
+
         private float ContentSpacing => contentVerticalLayoutGroup.spacing;
 
         public void Init(EcsWorld ecsWorld)
@@ -36,6 +38,8 @@ namespace Game.View
             view.Init(business);
             businessViews.Add(business, view);
 
+            newBusinessViews.Add(business.Id, view);
+
             view.OnLevelUpClick += OnLevelUpViewClick;
 
             view.OnBuyUpgradeClick += OnBuyUpgradeClick;
@@ -47,6 +51,14 @@ namespace Game.View
             if (businessViews.ContainsKey(business))
             {
                 businessViews[business].UpdateView();
+            }
+        }
+
+        public void UpdateView(string businessId)
+        {
+            if (newBusinessViews.TryGetValue(businessId, out var businessView))
+            {
+                businessView.UpdateView();
             }
         }
 

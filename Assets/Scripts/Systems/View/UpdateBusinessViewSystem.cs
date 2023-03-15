@@ -9,7 +9,10 @@ namespace Game.Systems
         private readonly BusinessViewsController businessViewController;
 
         private readonly EcsFilter<UpdateBusinessComponent> filter;
-        
+
+        private readonly EcsFilter<NewUpdateBusinessComponent, NewBusinessComponent> newFilter;
+
+
         public void Run()
         {
             foreach(var i in filter)
@@ -20,6 +23,16 @@ namespace Game.Systems
                 businessViewController.UpdateView(business);
 
                 entity.Del<UpdateBusinessComponent>();
+            }
+
+            foreach (var i in newFilter)
+            {
+                ref var business = ref newFilter.Get2(i);
+                ref var entity = ref filter.GetEntity(i);
+
+                businessViewController.UpdateView(business.Id);
+
+                entity.Del<NewUpdateBusinessComponent>();
             }
         }
     }
