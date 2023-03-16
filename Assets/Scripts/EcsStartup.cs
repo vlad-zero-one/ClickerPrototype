@@ -44,7 +44,8 @@ namespace Game
                 .Inject(balanceView)
                 .Inject(viewsController)
                 .Inject(menu)
-                .Inject(new BusinessesManager());
+                //.Inject(new BusinessesManager())
+                .Inject(new BalanceManager());
 
 
             systems.Init();
@@ -56,8 +57,8 @@ namespace Game
 
             systems
                 .Add(new CreateBusinessesSystem())
-                .Add(new SaveLoadSystem())
                 .Add(new InitialBusinessSystem())
+                .Add(new SaveLoadSystem())
                 .Add(new LevelUpSystem())
                 .Add(new BuyUpgradeSystem())
                 .Add(new ProgressSystem())

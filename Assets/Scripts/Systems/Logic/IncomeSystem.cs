@@ -7,14 +7,14 @@ namespace Game.Systems
     {
         readonly private EcsFilter<IncomeComponent> filter;
 
-        readonly private BusinessesManager businessesManager;
+        readonly private BalanceManager balanceManager;
 
         public void Run() 
         {
             foreach(var i in filter)
             {
                 ref var entity = ref filter.GetEntity(i);
-                businessesManager.AddMoney(filter.Get1(i).Income);
+                balanceManager.AddMoney(filter.Get1(i).Income);
 
                 entity.Get<UpdateBalanceComponent>();
                 entity.Del<IncomeComponent>();

@@ -15,14 +15,10 @@ namespace Game.Components
             Bought = false;
         }
 
+        public string Id => data.Id;
         public string Name => name;
         public double Price => data.Price;
         public float Factor => data.Factor;
-        public bool Bought { get; private set; }
-
-        public void Buy()
-        {
-            Bought = true;
-        }
+        public bool Bought { get; set; }
     }
 }

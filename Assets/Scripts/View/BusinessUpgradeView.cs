@@ -1,3 +1,4 @@
+using Game.Components;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,40 +19,31 @@ namespace Game.View
         [SerializeField] private GameObject priceContainer;
         [SerializeField] private GameObject boughtContainer;
 
-        private BusinessUpgrade businessUpgrade;
+        private string upgradeId;
 
-        public delegate void Click(BusinessUpgrade businessUpgrade);
+        public delegate void Click(string businessId);
         public event Click OnClick;
 
-        public void Init(BusinessUpgrade businessUpgrade)
+        public void Init(ref NewBusinessUpgradeComponent businessUpgrade)
         {
-            this.businessUpgrade = businessUpgrade;
-
-            UpdateView();
+            upgradeName.text = businessUpgrade.Name;
+            factor.text = string.Format(factorFormat, businessUpgrade.Factor * 100);
+            price.text = string.Format(priceFormat, businessUpgrade.Price);
 
             button.onClick.AddListener(InvokeClick);
         }
 
-        public void UpdateView()
-        {
-            if (!businessUpgrade.Bought)
-            {
-                upgradeName.text = businessUpgrade.Name;
-                factor.text = string.Format(factorFormat, businessUpgrade.Factor * 100);
-                price.text = string.Format(priceFormat, businessUpgrade.Price);
-            }
-            else
-            {
-                button.onClick.RemoveListener(InvokeClick);
-            }
+        public void SetBoughtState()
+        {           
+            button.onClick.RemoveListener(InvokeClick);          
 
-            priceContainer.SetActive(!businessUpgrade.Bought);
-            boughtContainer.SetActive(businessUpgrade.Bought);
+            priceContainer.SetActive(false);
+            boughtContainer.SetActive(true);
         }
 
         private void InvokeClick()
         {
-            OnClick?.Invoke(businessUpgrade);
+            OnClick?.Invoke(upgradeId);
         }
 
         private void OnDestroy()

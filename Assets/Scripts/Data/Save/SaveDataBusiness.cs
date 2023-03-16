@@ -1,3 +1,4 @@
+using Game.Components;
 using System;
 
 namespace Game.Save
@@ -12,6 +13,15 @@ namespace Game.Save
         public bool SecondUpgradeBought;
 
         public SaveDataBusiness(Business business, float progress)
+        {
+            Id = business.Id;
+            Level = business.Level;
+            Progress = progress;
+            FirstUpgradeBought = business.FirstUpgrade.Bought;
+            SecondUpgradeBought = business.SecondUpgrade.Bought;
+        }
+
+        public SaveDataBusiness(ref NewBusinessComponent business, float progress)
         {
             Id = business.Id;
             Level = business.Level;

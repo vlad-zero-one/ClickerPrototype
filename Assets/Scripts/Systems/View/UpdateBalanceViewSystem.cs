@@ -7,7 +7,7 @@ namespace Game.Systems
     public class UpdateBalanceViewSystem : IEcsRunSystem 
     {
         private readonly BalanceView balanceView;
-        private readonly BusinessesManager businessesManager;
+        private readonly BalanceManager balanceManager;
 
         private readonly EcsFilter<UpdateBalanceComponent> filter;
         
@@ -15,7 +15,7 @@ namespace Game.Systems
         {
             if (filter.GetEntitiesCount() > 0)
             {
-                balanceView.SetValue(businessesManager.Balance);
+                balanceView.SetValue(balanceManager.Balance);
             }
         }
     }

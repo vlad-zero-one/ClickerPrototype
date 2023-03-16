@@ -26,7 +26,7 @@ namespace Game.Systems
                 var businessComponent = new NewBusinessComponent(businessData, nameData);
                 ecsWorld.NewEntity().Replace(in businessComponent);
 
-                businessesManager.AddBusiness(business);
+                //businessesManager.AddBusiness(business);
             }
         }
     }

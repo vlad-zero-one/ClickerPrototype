@@ -4,4 +4,9 @@ namespace Game.Components
     {
         public Business Business;
     }
+
+    public struct NewLevelUpClickComponent
+    {
+        public string BusinessId;
+    }
 }

@@ -29,14 +29,14 @@ namespace Game.View
             prefabYSize = businessViewPrefab.GetComponent<RectTransform>().sizeDelta.y;
         }
 
-        public void Instantiate(Business business)
+
+        public void Instantiate(ref NewBusinessComponent business)
         {
             var view = Instantiate(businessViewPrefab, scrollViewContent);
 
             scrollViewContent.sizeDelta += new Vector2(0, prefabYSize + ContentSpacing);
 
-            view.Init(business);
-            businessViews.Add(business, view);
+            view.Init(ref business);
 
             newBusinessViews.Add(business.Id, view);
 
@@ -46,19 +46,11 @@ namespace Game.View
 
         }
 
-        public void UpdateView(Business business)
+        public void UpdateView(ref NewBusinessComponent business)
         {
-            if (businessViews.ContainsKey(business))
+            if (newBusinessViews.TryGetValue(business.Id, out var businessView))
             {
-                businessViews[business].UpdateView();
-            }
-        }
-
-        public void UpdateView(string businessId)
-        {
-            if (newBusinessViews.TryGetValue(businessId, out var businessView))
-            {
-                businessView.UpdateView();
+                businessView.UpdateView(ref business);
             }
         }
 
@@ -70,16 +62,24 @@ namespace Game.View
             }
         }
 
-        private void OnLevelUpViewClick(Business business)
+        public void SetProgress(string businessId, float progress)
         {
-            ecsWorld.NewEntity().Get<LevelUpClickComponent>().Business = business;
+            if (newBusinessViews.TryGetValue(businessId, out var businessView))
+            {
+                businessView.SetProgress(progress);
+            }
         }
 
-        private void OnBuyUpgradeClick(Business business, BusinessUpgrade businessUpgrade)
+        private void OnLevelUpViewClick(string businessId)
         {
-            ref var comp = ref ecsWorld.NewEntity().Get<BuyUpgradeClickComponent>();
-            comp.Business = business;
-            comp.BusinessUpgrade = businessUpgrade;
+            ecsWorld.NewEntity().Get<NewLevelUpClickComponent>().BusinessId = businessId;
+        }
+
+        private void OnBuyUpgradeClick(string businessId, string businessUpgradeId)
+        {
+            ref var comp = ref ecsWorld.NewEntity().Get<NewBuyUpgradeClickComponent>();
+            comp.BusinessId = businessId;
+            comp.BusinessUpgradeId = businessUpgradeId;
         }
 
         private void OnDestroy()

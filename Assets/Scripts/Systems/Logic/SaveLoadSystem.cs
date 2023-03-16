@@ -15,7 +15,9 @@ namespace Game.Systems
 
         private readonly SaveConfig saveConfig;
 
-        private readonly BusinessesManager businessesManager;
+        //private readonly BusinessesManager businessesManager;
+
+        private readonly BalanceManager balanceManager;
 
         private readonly EcsFilter<BusinessComponent, ProgressComponent> progressFilter;
 
@@ -67,17 +69,30 @@ namespace Game.Systems
 
         private void SaveGame()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream file = File.Create(saveFilePath);
-            SaveData data = new SaveData();
+            var formatter = new BinaryFormatter();
+            var file = File.Create(saveFilePath);
+            var data = new SaveData();
 
-            data.Balance = businessesManager.Balance;
-            foreach(var i in progressFilter)
+            //data.Balance = businessesManager.Balance;
+            //foreach(var i in progressFilter)
+            //{
+            //    var business = progressFilter.Get1(i).Business;
+            //    var progress = progressFilter.Get2(i).Progress;
+
+            //    data.Bisunesses.Add(new SaveDataBusiness(business, progress));
+            //}
+
+            data.Balance = balanceManager.Balance;
+            foreach (var i in newBusinessesFilter)
             {
-                var business = progressFilter.Get1(i).Business;
-                var progress = progressFilter.Get2(i).Progress;
+                ref var businessEntuty = ref newBusinessesFilter.GetEntity(i);
+                if (businessEntuty.Has<ProgressComponent>())
+                {
+                    ref var business = ref businessEntuty.Get<NewBusinessComponent>();
+                    var progress = businessEntuty.Get<ProgressComponent>().Progress;
 
-                data.Bisunesses.Add(new SaveDataBusiness(business, progress));
+                    data.Bisunesses.Add(new SaveDataBusiness(ref business, progress));
+                }
             }
 
             formatter.Serialize(file, data);
@@ -90,12 +105,14 @@ namespace Game.Systems
 
         private void LoadGame()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream file = File.Open(saveFilePath, FileMode.Open);
-            SaveData data = (SaveData)formatter.Deserialize(file);
+            var formatter = new BinaryFormatter();
+            var file = File.Open(saveFilePath, FileMode.Open);
+            var data = (SaveData)formatter.Deserialize(file);
             file.Close();
 
-            businessesManager.SetMoney(data.Balance);
+            //businessesManager.SetMoney(data.Balance);
+
+            balanceManager.SetMoney(data.Balance);
             ecsWorld.NewEntity().Get<UpdateBalanceComponent>();
 
             var businessLoadData = new Dictionary<string, SaveDataBusiness>();
@@ -104,16 +121,16 @@ namespace Game.Systems
             {
                 businessLoadData.Add(businessData.Id, businessData);
 
-                if (businessesManager.LoadBusiness(businessData))
-                {
-                    var progressEntity = ecsWorld.NewEntity();
-                    progressEntity.Get<BusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
-                    progressEntity.Get<ProgressComponent>().Progress = businessData.Progress;
-                    progressEntity.Get<UpdateBusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
-                }
+                //    if (businessesManager.LoadBusiness(businessData))
+                //    {
+                //        var progressEntity = ecsWorld.NewEntity();
+                //        progressEntity.Get<BusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
+                //        progressEntity.Get<ProgressComponent>().Progress = businessData.Progress;
+                //        progressEntity.Get<UpdateBusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
+                //    }
             }
 
-            foreach(var i in newBusinessesFilter)
+            foreach (var i in newBusinessesFilter)
             {
                 ref var entity = ref newBusinessesFilter.GetEntity(i);
                 ref var businessComponent = ref newBusinessesFilter.Get1(i);
@@ -123,7 +140,7 @@ namespace Game.Systems
                     businessComponent.FromLoad(businessData);
 
                     entity.Get<ProgressComponent>().Progress = businessData.Progress;
-                    //entity.Get<NewUpdateBusinessComponent>();
+                    entity.Get<NewUpdateBusinessComponent>();
                 }
             }
 

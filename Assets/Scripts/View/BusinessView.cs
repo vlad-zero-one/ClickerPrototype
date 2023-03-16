@@ -1,3 +1,4 @@
+using Game.Components;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,52 +20,52 @@ namespace Game.View
         [Space]
         [SerializeField] private string priceFormat;
 
-        private Business business;
+        private NewBusinessComponent newBusinessComponent;
 
-        public delegate void LevelUpClick(Business business);
-        public delegate void UpgradeClick(Business business, BusinessUpgrade businessUpgrade);
+        public delegate void LevelUpClick(string businessId);
+        public delegate void UpgradeClick(string businessId, string businessUpgradeId);
 
         public event LevelUpClick OnLevelUpClick;
         public event UpgradeClick OnBuyUpgradeClick;
 
-        public void Init(Business business)
+        public void Init(ref NewBusinessComponent business)
         {
-            this.business = business;
+            newBusinessComponent = business;
 
-            firstUpgrade.Init(business.FirstUpgrade);
-            secondUpgrade.Init(business.SecondUpgrade);
+            firstUpgrade.Init(ref business.FirstUpgrade);
+            secondUpgrade.Init(ref business.SecondUpgrade);
 
-            UpdateView();
+            UpdateView(ref business);
 
             levelUpButton.onClick.AddListener(InvokeClick);
             firstUpgrade.OnClick += BuyUpgrade;
             secondUpgrade.OnClick += BuyUpgrade;
         }
 
-        public void UpdateView()
+        public void UpdateView(ref NewBusinessComponent business)
         {
             businessName.text = business.Name;
             levelText.text = business.Level.ToString();
             incomeText.text = string.Format(priceFormat, business.Income);
             levelUpPrice.text = string.Format(priceFormat, business.LevelUpPrice);
 
-            firstUpgrade.UpdateView();
-            secondUpgrade.UpdateView();
+            if (business.FirstUpgrade.Bought) firstUpgrade.SetBoughtState();
+            if (business.SecondUpgrade.Bought) secondUpgrade.SetBoughtState();
         }
 
         public void SetProgress(float progress)
         {
-            progressBar.value = progress / business.IncomeTime;
+            progressBar.value = progress / newBusinessComponent.IncomeTime;
         }
 
-        private void BuyUpgrade(BusinessUpgrade businessUpgrade)
+        private void BuyUpgrade(string businessUpgradeId)
         {
-            OnBuyUpgradeClick?.Invoke(business, businessUpgrade);
+            OnBuyUpgradeClick?.Invoke(newBusinessComponent.Id, businessUpgradeId);
         }
 
         private void InvokeClick()
         {
-            OnLevelUpClick?.Invoke(business);
+            OnLevelUpClick?.Invoke(newBusinessComponent.Id);
         }
 
         private void OnDestroy()
