@@ -5,50 +5,34 @@ namespace Game.Systems
 {
     public class BuyUpgradeSystem : IEcsRunSystem
     {
-        //private readonly BusinessesManager businessesManager;
-
-        //private readonly EcsFilter<BuyUpgradeClickComponent> filter;
-
         private readonly BalanceManager balanceManager;
 
-        private readonly EcsFilter<BuyUpgradeClickComponent, NewBusinessComponent, NewBusinessUpgradeComponent> newFilter;
+        private readonly EcsFilter<NewBuyUpgradeClickComponent> upgradeClickFilter;
+
+        private readonly EcsFilter<NewBusinessComponent, ProgressComponent> businessFilter;
 
         public void Run()
         {
-            //foreach(var i in filter)
-            //{
-            //    ref var comp = ref filter.Get1(i);
-            //    var business = comp.Business;
-            //    var upgrade = comp.BusinessUpgrade;
-
-            //    ref var entity = ref filter.GetEntity(i);
-
-            //    if (businessesManager.BuyUpgrade(business, upgrade))
-            //    {
-            //        entity.Get<UpdateBusinessComponent>().Business = business;
-
-            //        entity.Get<UpdateBalanceComponent>();
-            //    }
-
-            //    entity.Del<BuyUpgradeClickComponent>();
-            //}
-
-            foreach (var i in newFilter)
+            foreach (var i in upgradeClickFilter)
             {
-                ref var entity = ref newFilter.GetEntity(i);
-                ref var business = ref newFilter.Get2(i);
-                ref var upgrade = ref newFilter.Get3(i);
-
-                if (balanceManager.Spend(upgrade.Price))
+                foreach (var j in businessFilter)
                 {
-                    business.BuyUpgrade(upgrade.Id);
+                    ref var upgradeComponent = ref upgradeClickFilter.Get1(i);
+                    ref var business = ref businessFilter.Get1(j);
+                    var upgradeId = upgradeComponent.BusinessUpgradeId;
 
-                    entity.Get<NewUpdateBusinessComponent>();
+                    if (upgradeComponent.BusinessId == business.Id && business.HasUpgrade(upgradeId))
+                    {
+                        if (balanceManager.Spend(business.GetUpgradePrice(upgradeId)))
+                        {
+                            business.BuyUpgrade(upgradeId);
 
-                    entity.Get<UpdateBalanceComponent>();
+                            businessFilter.GetEntity(j).Get<NewUpdateBusinessComponent>();
+
+                            upgradeClickFilter.GetEntity(i).Get<UpdateBalanceComponent>();
+                        }
+                    }
                 }
-
-                entity.Del<BuyUpgradeClickComponent>();
             }
         }
     }

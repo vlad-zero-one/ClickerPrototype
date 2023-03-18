@@ -16,8 +16,6 @@ namespace Game.View
 
         private float prefabYSize;
 
-        private Dictionary<Business, BusinessView> businessViews = new();
-
         private Dictionary<string, BusinessView> newBusinessViews = new();
 
         private float ContentSpacing => contentVerticalLayoutGroup.spacing;
@@ -41,9 +39,7 @@ namespace Game.View
             newBusinessViews.Add(business.Id, view);
 
             view.OnLevelUpClick += OnLevelUpViewClick;
-
             view.OnBuyUpgradeClick += OnBuyUpgradeClick;
-
         }
 
         public void UpdateView(ref NewBusinessComponent business)
@@ -51,14 +47,6 @@ namespace Game.View
             if (newBusinessViews.TryGetValue(business.Id, out var businessView))
             {
                 businessView.UpdateView(ref business);
-            }
-        }
-
-        public void SetProgress(Business business, float progress)
-        {
-            if (businessViews.ContainsKey(business))
-            {
-                businessViews[business].SetProgress(progress);
             }
         }
 
@@ -84,7 +72,7 @@ namespace Game.View
 
         private void OnDestroy()
         {
-            foreach (var view in businessViews.Values)
+            foreach (var view in newBusinessViews.Values)
             {
                 view.OnLevelUpClick -= OnLevelUpViewClick;
                 view.OnBuyUpgradeClick -= OnBuyUpgradeClick;

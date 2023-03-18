@@ -60,7 +60,9 @@ namespace Game
                 .Add(new InitialBusinessSystem())
                 .Add(new SaveLoadSystem())
                 .Add(new LevelUpSystem())
+                .OneFrame<NewLevelUpClickComponent>()
                 .Add(new BuyUpgradeSystem())
+                .OneFrame<NewBuyUpgradeClickComponent>()
                 .Add(new ProgressSystem())
                 .Add(new IncomeSystem());
 

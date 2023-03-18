@@ -47,7 +47,25 @@ namespace Game.Components
             if (upgrades.TryGetValue(upgradeId, out var upgrade))
             {
                 upgrade.Bought = true;
+
+                if (FirstUpgrade.Id == upgradeId) FirstUpgrade.Bought = true;
+                if (SecondUpgrade.Id == upgradeId) SecondUpgrade.Bought = true;
             }
+        }
+
+        public bool HasUpgrade(string upgradeId)
+        {
+            return upgrades.ContainsKey(upgradeId);
+        }
+
+        public double GetUpgradePrice(string upgradeId)
+        {
+            if (upgrades.TryGetValue(upgradeId, out var upgrade))
+            {
+                return upgrade.Price;
+            }
+
+            return 0;
         }
 
         public void FromLoad(SaveDataBusiness saveData)

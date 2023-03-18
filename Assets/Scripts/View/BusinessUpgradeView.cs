@@ -26,6 +26,7 @@ namespace Game.View
 
         public void Init(ref NewBusinessUpgradeComponent businessUpgrade)
         {
+            upgradeId = businessUpgrade.Id;
             upgradeName.text = businessUpgrade.Name;
             factor.text = string.Format(factorFormat, businessUpgrade.Factor * 100);
             price.text = string.Format(priceFormat, businessUpgrade.Price);

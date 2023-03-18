@@ -15,8 +15,6 @@ namespace Game.Systems
         {
             foreach (var i in levelUpClickFilter)
             {
-                ref var levelUpEntity = ref levelUpClickFilter.GetEntity(i);
-
                 foreach (var j in businessFilter)
                 {
                     if (businessFilter.Get1(j).Id == levelUpClickFilter.Get1(i).BusinessId)
@@ -35,14 +33,12 @@ namespace Game.Systems
 
                             businessEntity.Get<NewUpdateBusinessComponent>();
 
-                            levelUpEntity.Get<UpdateBalanceComponent>();
+                            levelUpClickFilter.GetEntity(i).Get<UpdateBalanceComponent>();
                         }
 
                         break;
                     }
                 }
-
-                levelUpEntity.Del<NewLevelUpClickComponent>();
             }
         }
     }
