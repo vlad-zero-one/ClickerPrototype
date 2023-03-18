@@ -9,7 +9,7 @@ namespace Game.Systems
 
         readonly private BalanceManager balanceManager;
 
-        public void Run() 
+        public void Run()
         {
             foreach(var i in filter)
             {

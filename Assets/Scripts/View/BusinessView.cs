@@ -20,7 +20,8 @@ namespace Game.View
         [Space]
         [SerializeField] private string priceFormat;
 
-        private NewBusinessComponent newBusinessComponent;
+        private string businessId;
+        private float incomeTime;
 
         public delegate void LevelUpClick(string businessId);
         public delegate void UpgradeClick(string businessId, string businessUpgradeId);
@@ -30,10 +31,13 @@ namespace Game.View
 
         public void Init(ref NewBusinessComponent business)
         {
-            newBusinessComponent = business;
+            businessId = business.Id;
+            incomeTime = business.IncomeTime;
 
             firstUpgrade.Init(ref business.FirstUpgrade);
             secondUpgrade.Init(ref business.SecondUpgrade);
+
+            businessName.text = business.Name;
 
             UpdateView(ref business);
 
@@ -44,7 +48,6 @@ namespace Game.View
 
         public void UpdateView(ref NewBusinessComponent business)
         {
-            businessName.text = business.Name;
             levelText.text = business.Level.ToString();
             incomeText.text = string.Format(priceFormat, business.Income);
             levelUpPrice.text = string.Format(priceFormat, business.LevelUpPrice);
@@ -55,17 +58,17 @@ namespace Game.View
 
         public void SetProgress(float progress)
         {
-            progressBar.value = progress / newBusinessComponent.IncomeTime;
+            progressBar.value = progress / incomeTime;
         }
 
         private void BuyUpgrade(string businessUpgradeId)
         {
-            OnBuyUpgradeClick?.Invoke(newBusinessComponent.Id, businessUpgradeId);
+            OnBuyUpgradeClick?.Invoke(businessId, businessUpgradeId);
         }
 
         private void InvokeClick()
         {
-            OnLevelUpClick?.Invoke(newBusinessComponent.Id);
+            OnLevelUpClick?.Invoke(businessId);
         }
 
         private void OnDestroy()

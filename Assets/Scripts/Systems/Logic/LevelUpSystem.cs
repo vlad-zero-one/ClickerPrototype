@@ -5,60 +5,44 @@ namespace Game.Systems
 {
     public class LevelUpSystem : IEcsRunSystem
     {
-        private readonly EcsWorld ecsWorld;
-
-        //private readonly BusinessesManager businessesManager;
-
         private readonly BalanceManager balanceManager;
 
-        //private readonly EcsFilter<LevelUpClickComponent> filter;
+        private readonly EcsFilter<NewLevelUpClickComponent> levelUpClickFilter;
 
-        private readonly EcsFilter<LevelUpClickComponent, NewBusinessComponent> newFilter;
+        private readonly EcsFilter<NewBusinessComponent> businessFilter;
 
         public void Run()
         {
-            //foreach (var i in filter)
-            //{
-            //    var business = filter.Get1(i).Business;
-            //    ref var levelUpEntity = ref filter.GetEntity(i);
-
-            //    if (businessesManager.LevelUp(business))
-            //    {
-            //        if (business.Level == 1)
-            //        {
-            //            var startProgressEntity = ecsWorld.NewEntity();
-            //            startProgressEntity.Get<ProgressComponent>();
-            //            startProgressEntity.Get<BusinessComponent>().Business = business;
-            //        }
-
-            //        levelUpEntity.Get<UpdateBusinessComponent>().Business = business;
-
-            //        levelUpEntity.Get<UpdateBalanceComponent>();
-            //    }
-
-            //    levelUpEntity.Del<LevelUpClickComponent>();
-            //}
-
-            foreach (var i in newFilter)
+            foreach (var i in levelUpClickFilter)
             {
-                ref var levelUpEntity = ref newFilter.GetEntity(i);
-                ref var business = ref newFilter.Get2(i);
+                ref var levelUpEntity = ref levelUpClickFilter.GetEntity(i);
 
-                if (balanceManager.Spend(business.LevelUpPrice))
+                foreach (var j in businessFilter)
                 {
-                    business.LevelUp();
-
-                    if (business.Level == 1)
+                    if (businessFilter.Get1(j).Id == levelUpClickFilter.Get1(i).BusinessId)
                     {
-                        levelUpEntity.Get<ProgressComponent>();
+                        ref var businessEntity = ref businessFilter.GetEntity(j);
+                        ref var business = ref businessFilter.Get1(j);
+
+                        if (balanceManager.Spend(business.LevelUpPrice))
+                        {
+                            business.LevelUp();
+
+                            if (business.Level == 1)
+                            {
+                                businessEntity.Get<ProgressComponent>();
+                            }
+
+                            businessEntity.Get<NewUpdateBusinessComponent>();
+
+                            levelUpEntity.Get<UpdateBalanceComponent>();
+                        }
+
+                        break;
                     }
-
-                    levelUpEntity.Get<NewUpdateBusinessComponent>();
-
-                    levelUpEntity.Get<UpdateBalanceComponent>();
                 }
 
-                levelUpEntity.Del<LevelUpClickComponent>();
+                levelUpEntity.Del<NewLevelUpClickComponent>();
             }
         }
     }
