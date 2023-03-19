@@ -13,23 +13,38 @@ MonoBehaviour:
   m_Name: NamesConfig
   m_EditorClassIdentifier: 
   Values:
-  - Id: default
-    BusinessName: Default Business
-    FirstUpgradeName: First Upgrade
-    SecondUpgradeName: Second Upgrade
-  - Id: 1
-    BusinessName: Business 1
-    FirstUpgradeName: First Upgrade
-    SecondUpgradeName: Second Upgrade
-  - Id: 2
-    BusinessName: Business 2
-    FirstUpgradeName: First Upgrade
-    SecondUpgradeName: Second Upgrade
-  - Id: 3
-    BusinessName: Business 3
-    FirstUpgradeName: First Upgrade
-    SecondUpgradeName: Second Upgrade
-  - Id: 4
-    BusinessName: Business 4
-    FirstUpgradeName: First Upgrade
-    SecondUpgradeName: Second Upgrade
+  - id: default
+    businessName: Default Business
+    upgradeNames:
+    - Id: 1
+      Name: First Upgrade
+    - Id: 2
+      Name: Second Upgrade
+  - id: 1
+    businessName: Business 1
+    upgradeNames:
+    - Id: 1
+      Name: First Upgrade
+    - Id: 2
+      Name: Second Upgrade
+  - id: 2
+    businessName: Business 2
+    upgradeNames:
+    - Id: 1
+      Name: First Upgrade
+    - Id: 2
+      Name: Second Upgrade
+  - id: 3
+    businessName: Business 3
+    upgradeNames:
+    - Id: 1
+      Name: First Upgrade
+    - Id: 2
+      Name: Second Upgrade
+  - id: 4
+    businessName: Business 4
+    upgradeNames:
+    - Id: 1
+      Name: First Upgrade
+    - Id: 2
+      Name: Second Upgrade

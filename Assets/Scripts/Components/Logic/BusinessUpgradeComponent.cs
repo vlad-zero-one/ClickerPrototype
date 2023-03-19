@@ -2,7 +2,7 @@ using Game.Configs;
 
 namespace Game.Components
 {
-    public struct BusinessUpgradeComponent
+    public class BusinessUpgradeComponent
     {
         private readonly BusinessUpgradeData data;
         private readonly string name;

@@ -36,17 +36,13 @@ namespace Game
                 .Add(CreateSystems())
                 .Add(CreateViewSystems())
 
-                .OneFrame<UpdateBalanceViewComponent>()
-
                 .Inject(businessesConfig)
                 .Inject(namesConfig)
                 .Inject(saveConfig)
                 .Inject(balanceView)
                 .Inject(viewsController)
                 .Inject(menu)
-                //.Inject(new BusinessesManager())
                 .Inject(new BalanceManager());
-
 
             systems.Init();
         }
@@ -78,6 +74,7 @@ namespace Game
                 .Add(new InitMenuSystem())
                 .Add(new CreateBusinessViewsSystem())
                 .Add(new UpdateBalanceViewSystem())
+                .OneFrame<UpdateBalanceViewComponent>()
                 .Add(new UpdateBusinessViewSystem())
                 .Add(new UpdateProgressViewsSystem());
 

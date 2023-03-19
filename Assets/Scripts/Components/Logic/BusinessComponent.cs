@@ -1,18 +1,18 @@
 using Game.Configs;
 using Game.Save;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Game.Components
 {
     public struct BusinessComponent
     {
-        public BusinessUpgradeComponent FirstUpgrade;
-        public BusinessUpgradeComponent SecondUpgrade;
-
         private readonly BusinessData data;
         private readonly BusinessNamesData namesData;
 
-        private Dictionary<string, BusinessUpgradeComponent> upgrades;
+        private readonly Dictionary<string, BusinessUpgradeComponent> upgrades;
+
+        public List<BusinessUpgradeComponent> Upgrades => upgrades.Values.ToList();
 
         public BusinessComponent(BusinessData data, BusinessNamesData namesData)
         {
@@ -23,11 +23,15 @@ namespace Game.Components
 
             upgrades = new();
 
-            FirstUpgrade = new(data.FirstUpgradeData, namesData.FirstUpgradeName);
-            SecondUpgrade = new(data.SecondUpgradeData, namesData.SecondUpgradeName);
+            foreach(var upgrade in data.UpgradeDatas)
+            {
+                if (namesData.UpgradeNames.TryGetValue(upgrade.Id, out var name))
+                {
+                    var upgradeComponent = new BusinessUpgradeComponent(upgrade, name);
 
-            upgrades.Add(FirstUpgrade.Id, FirstUpgrade);
-            upgrades.Add(SecondUpgrade.Id, SecondUpgrade);
+                    upgrades.Add(upgrade.Id, upgradeComponent);
+                }
+            }
         }
 
         public string Id => data.Id;
@@ -47,9 +51,6 @@ namespace Game.Components
             if (upgrades.TryGetValue(upgradeId, out var upgrade))
             {
                 upgrade.Bought = true;
-
-                if (FirstUpgrade.Id == upgradeId) FirstUpgrade.Bought = true;
-                if (SecondUpgrade.Id == upgradeId) SecondUpgrade.Bought = true;
             }
         }
 
@@ -71,13 +72,20 @@ namespace Game.Components
         public void FromLoad(SaveDataBusiness saveData)
         {
             Level = saveData.Level;
-            if (saveData.FirstUpgradeBought) FirstUpgrade.Bought = true;
-            if (saveData.SecondUpgradeBought) SecondUpgrade.Bought = true;
+
+            foreach(var upgrageData in saveData.IsUpgradeBought)
+            {
+                if (upgrades.ContainsKey(upgrageData.Key))
+                {
+                    var upgrade = upgrades[upgrageData.Key];
+                    upgrade.Bought = upgrageData.Value;
+                }
+            }
         }
 
         private double Factors()
         {
-            return (FirstUpgrade.Bought ? FirstUpgrade.Factor : 0) + (SecondUpgrade.Bought ? SecondUpgrade.Factor : 0);
+            return upgrades.Values.Where(upgrade => upgrade.Bought).Sum(upgrade => upgrade.Factor);
         }
     }
 }

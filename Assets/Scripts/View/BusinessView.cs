@@ -34,8 +34,8 @@ namespace Game.View
             businessId = business.Id;
             incomeTime = business.IncomeTime;
 
-            firstUpgrade.Init(ref business.FirstUpgrade);
-            secondUpgrade.Init(ref business.SecondUpgrade);
+            firstUpgrade.Init(business.Upgrades[0]);
+            secondUpgrade.Init(business.Upgrades[1]);
 
             businessName.text = business.Name;
 
@@ -52,8 +52,8 @@ namespace Game.View
             incomeText.text = string.Format(priceFormat, business.Income);
             levelUpPrice.text = string.Format(priceFormat, business.LevelUpPrice);
 
-            if (business.FirstUpgrade.Bought) firstUpgrade.SetBoughtState();
-            if (business.SecondUpgrade.Bought) secondUpgrade.SetBoughtState();
+            if (business.Upgrades[0].Bought) firstUpgrade.SetBoughtState();
+            if (business.Upgrades[1].Bought) secondUpgrade.SetBoughtState();
         }
 
         public void SetProgress(float progress)

@@ -33,8 +33,12 @@ namespace Editor
             var style = new GUIStyle();
             style.fontStyle = FontStyle.Bold;
             EditorGUILayout.LabelField("Upgrades", style);
-            EditorGUILayout.LabelField("FirstUpgrade", component.FirstUpgrade.ToString());
-            EditorGUILayout.LabelField("SecondUpgrade", component.SecondUpgrade.ToString());
+
+            foreach(var upgrade in component.Upgrades)
+            {
+                EditorGUILayout.LabelField("Upgrade", upgrade.ToString());
+                EditorGUILayout.LabelField("Upgrade", upgrade.ToString());
+            }
 
             EditorGUI.indentLevel--;
         }

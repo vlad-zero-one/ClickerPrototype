@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Configs
@@ -12,7 +13,6 @@ namespace Game.Configs
         public double BaseLevelUpPrice;
         public double BaseIncome;
         [Space]
-        public BusinessUpgradeData FirstUpgradeData;
-        public BusinessUpgradeData SecondUpgradeData;
+        public List<BusinessUpgradeData> UpgradeDatas;
     }
 }

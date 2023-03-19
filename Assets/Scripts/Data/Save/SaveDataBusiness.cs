@@ -1,5 +1,6 @@
 using Game.Components;
 using System;
+using System.Collections.Generic;
 
 namespace Game.Save
 {
@@ -12,13 +13,19 @@ namespace Game.Save
         public bool FirstUpgradeBought;
         public bool SecondUpgradeBought;
 
+        public Dictionary<string, bool> IsUpgradeBought;
+
         public SaveDataBusiness(ref BusinessComponent business, float progress)
         {
             Id = business.Id;
             Level = business.Level;
             Progress = progress;
-            FirstUpgradeBought = business.FirstUpgrade.Bought;
-            SecondUpgradeBought = business.SecondUpgrade.Bought;
+            IsUpgradeBought = new();
+
+            foreach (var upgrade in business.Upgrades)
+            {
+                IsUpgradeBought.Add(upgrade.Id, upgrade.Bought);
+            }
         }
     }
 }

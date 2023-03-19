@@ -25,6 +25,13 @@ MonoBehaviour:
       Id: 2
       Price: 400
       Factor: 1
+    UpgradeDatas:
+    - Id: 1
+      Price: 50
+      Factor: 0.5
+    - Id: 2
+      Price: 400
+      Factor: 1
   - Id: 2
     IncomeTime: 6
     BaseLevelUpPrice: 40
@@ -35,6 +42,13 @@ MonoBehaviour:
       Factor: 1
     SecondUpgradeData:
       Id: 2
+      Price: 4000
+      Factor: 2
+    UpgradeDatas:
+    - Id: 1
+      Price: 1200
+      Factor: 1
+    - Id: 2
       Price: 4000
       Factor: 2
   - Id: 3
@@ -49,6 +63,13 @@ MonoBehaviour:
       Id: 2
       Price: 20000
       Factor: 1.5
+    UpgradeDatas:
+    - Id: 1
+      Price: 6000
+      Factor: 1
+    - Id: 2
+      Price: 20000
+      Factor: 1.5
   - Id: 4
     IncomeTime: 17
     BaseLevelUpPrice: 1000
@@ -61,6 +82,13 @@ MonoBehaviour:
       Id: 2
       Price: 50000
       Factor: 2
+    UpgradeDatas:
+    - Id: 1
+      Price: 15000
+      Factor: 1
+    - Id: 2
+      Price: 50000
+      Factor: 2
   - Id: 5
     IncomeTime: 30
     BaseLevelUpPrice: 5000
@@ -71,6 +99,13 @@ MonoBehaviour:
       Factor: 2
     SecondUpgradeData:
       Id: 2
+      Price: 500000
+      Factor: 4
+    UpgradeDatas:
+    - Id: 1
+      Price: 100000
+      Factor: 2
+    - Id: 2
       Price: 500000
       Factor: 4
   InitialBusinessId: 1
