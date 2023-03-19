@@ -2,8 +2,6 @@ using Game.Components;
 using Leopotam.Ecs;
 using Leopotam.Ecs.UnityIntegration.Editor;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,15 +28,21 @@ namespace Editor
             EditorGUILayout.LabelField("IncomeTime", component.IncomeTime.ToString());
             EditorGUILayout.LabelField("LevelUpPrice", component.LevelUpPrice.ToString());
 
+            EditorGUILayout.Space();
             var style = new GUIStyle();
             style.fontStyle = FontStyle.Bold;
             EditorGUILayout.LabelField("Upgrades", style);
+            EditorGUI.indentLevel++;
 
-            foreach(var upgrade in component.Upgrades)
+            foreach (var upgrade in component.Upgrades)
             {
-                EditorGUILayout.LabelField("Upgrade", upgrade.ToString());
-                EditorGUILayout.LabelField("Upgrade", upgrade.ToString());
+                EditorGUILayout.LabelField("Id", upgrade.Id);
+                EditorGUILayout.LabelField("Name", upgrade.Name);
+                EditorGUILayout.LabelField("Factor", upgrade.Factor.ToString());
+                EditorGUILayout.LabelField("Bought?", upgrade.Bought.ToString());
+                EditorGUILayout.Space();
             }
+            EditorGUI.indentLevel--;
 
             EditorGUI.indentLevel--;
         }

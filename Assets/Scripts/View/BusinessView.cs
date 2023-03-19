@@ -1,4 +1,5 @@
 using Game.Components;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,13 +16,15 @@ namespace Game.View
         [SerializeField] private Button levelUpButton;
         [SerializeField] private TextMeshProUGUI levelUpPrice;
         [Space]
-        [SerializeField] private BusinessUpgradeView firstUpgrade;
-        [SerializeField] private BusinessUpgradeView secondUpgrade;
+        [SerializeField] private BusinessUpgradeView upgradePrefab;
+        [SerializeField] private RectTransform upgradeParent;
         [Space]
         [SerializeField] private string priceFormat;
 
         private string businessId;
         private float incomeTime;
+
+        private Dictionary<string, BusinessUpgradeView> upgradeViews;
 
         public delegate void LevelUpClick(string businessId);
         public delegate void UpgradeClick(string businessId, string businessUpgradeId);
@@ -34,16 +37,20 @@ namespace Game.View
             businessId = business.Id;
             incomeTime = business.IncomeTime;
 
-            firstUpgrade.Init(business.Upgrades[0]);
-            secondUpgrade.Init(business.Upgrades[1]);
-
             businessName.text = business.Name;
+
+            upgradeViews = new();
+            foreach (var upgrade in business.Upgrades)
+            {
+                var upgradeView = Instantiate(upgradePrefab, upgradeParent);
+                upgradeView.Init(upgrade);
+                upgradeView.OnClick += BuyUpgrade;
+                upgradeViews.Add(upgrade.Id, upgradeView);
+            }
 
             UpdateView(ref business);
 
             levelUpButton.onClick.AddListener(InvokeClick);
-            firstUpgrade.OnClick += BuyUpgrade;
-            secondUpgrade.OnClick += BuyUpgrade;
         }
 
         public void UpdateView(ref BusinessComponent business)
@@ -52,8 +59,16 @@ namespace Game.View
             incomeText.text = string.Format(priceFormat, business.Income);
             levelUpPrice.text = string.Format(priceFormat, business.LevelUpPrice);
 
-            if (business.Upgrades[0].Bought) firstUpgrade.SetBoughtState();
-            if (business.Upgrades[1].Bought) secondUpgrade.SetBoughtState();
+            foreach (var upgrade in business.Upgrades)
+            {
+                if (upgrade.Bought)
+                {
+                    if (upgradeViews.TryGetValue(upgrade.Id, out var view))
+                    {
+                        view.SetBoughtState();
+                    }
+                }
+            }
         }
 
         public void SetProgress(float progress)
@@ -74,8 +89,11 @@ namespace Game.View
         private void OnDestroy()
         {
             levelUpButton.onClick.RemoveListener(InvokeClick);
-            firstUpgrade.OnClick -= BuyUpgrade;
-            secondUpgrade.OnClick -= BuyUpgrade;
+
+            foreach (var upgrade in upgradeViews.Values)
+            {
+                upgrade.OnClick -= BuyUpgrade;
+            }
         }
     }
 }

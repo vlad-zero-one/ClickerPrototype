@@ -10,9 +10,9 @@ namespace Game.Components
         private readonly BusinessData data;
         private readonly BusinessNamesData namesData;
 
-        private readonly Dictionary<string, BusinessUpgradeComponent> upgrades;
+        private readonly Dictionary<string, BusinessUpgrade> upgrades;
 
-        public List<BusinessUpgradeComponent> Upgrades => upgrades.Values.ToList();
+        public List<BusinessUpgrade> Upgrades => upgrades.Values.ToList();
 
         public BusinessComponent(BusinessData data, BusinessNamesData namesData)
         {
@@ -27,7 +27,7 @@ namespace Game.Components
             {
                 if (namesData.UpgradeNames.TryGetValue(upgrade.Id, out var name))
                 {
-                    var upgradeComponent = new BusinessUpgradeComponent(upgrade, name);
+                    var upgradeComponent = new BusinessUpgrade(upgrade, name);
 
                     upgrades.Add(upgrade.Id, upgradeComponent);
                 }

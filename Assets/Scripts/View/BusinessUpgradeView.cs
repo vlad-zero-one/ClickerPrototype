@@ -24,7 +24,7 @@ namespace Game.View
         public delegate void Click(string businessId);
         public event Click OnClick;
 
-        public void Init(BusinessUpgradeComponent businessUpgrade)
+        public void Init(BusinessUpgrade businessUpgrade)
         {
             upgradeId = businessUpgrade.Id;
             upgradeName.text = businessUpgrade.Name;

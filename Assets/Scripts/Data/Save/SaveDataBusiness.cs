@@ -7,13 +7,10 @@ namespace Game.Save
     [Serializable]
     public class SaveDataBusiness
     {
-        public string Id;
-        public int Level;
-        public float Progress;
-        public bool FirstUpgradeBought;
-        public bool SecondUpgradeBought;
-
-        public Dictionary<string, bool> IsUpgradeBought;
+        public readonly string Id;
+        public readonly int Level;
+        public readonly float Progress;
+        public readonly Dictionary<string, bool> IsUpgradeBought;
 
         public SaveDataBusiness(ref BusinessComponent business, float progress)
         {
