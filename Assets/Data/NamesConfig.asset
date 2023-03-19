@@ -12,39 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abd15ba2618d9e418fd9a353feae976, type: 3}
   m_Name: NamesConfig
   m_EditorClassIdentifier: 
-  Values:
+  values:
   - id: default
     businessName: Default Business
     upgradeNames:
-    - Id: 1
-      Name: First Upgrade
-    - Id: 2
-      Name: Second Upgrade
+    - id: 1
+      name: First Upgrade
+    - id: 2
+      name: Second Upgrade
   - id: 1
     businessName: Business 1
     upgradeNames:
-    - Id: 1
-      Name: First Upgrade
-    - Id: 2
-      Name: Second Upgrade
+    - id: 1
+      name: First Upgrade
+    - id: 2
+      name: Second Upgrade
   - id: 2
     businessName: Business 2
     upgradeNames:
-    - Id: 1
-      Name: First Upgrade
-    - Id: 2
-      Name: Second Upgrade
+    - id: 1
+      name: First Upgrade
+    - id: 2
+      name: Second Upgrade
   - id: 3
     businessName: Business 3
     upgradeNames:
-    - Id: 1
-      Name: First Upgrade
-    - Id: 2
-      Name: Second Upgrade
+    - id: 1
+      name: First Upgrade
+    - id: 2
+      name: Second Upgrade
   - id: 4
     businessName: Business 4
     upgradeNames:
-    - Id: 1
-      Name: First Upgrade
-    - Id: 2
-      Name: Second Upgrade
+    - id: 1
+      name: First Upgrade
+    - id: 2
+      name: Second Upgrade

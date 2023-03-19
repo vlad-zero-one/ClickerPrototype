@@ -10,19 +10,21 @@ namespace Game.Save
         public readonly string Id;
         public readonly int Level;
         public readonly float Progress;
-        public readonly Dictionary<string, bool> IsUpgradeBought;
+        public readonly IReadOnlyDictionary<string, bool> IsUpgradeBought;
 
         public SaveDataBusiness(ref BusinessComponent business, float progress)
         {
             Id = business.Id;
             Level = business.Level;
             Progress = progress;
-            IsUpgradeBought = new();
+            var upgrades = new Dictionary<string, bool>();
 
             foreach (var upgrade in business.Upgrades)
             {
-                IsUpgradeBought.Add(upgrade.Id, upgrade.Bought);
+                upgrades.Add(upgrade.Id, upgrade.Bought);
             }
+
+            IsUpgradeBought = upgrades;
         }
     }
 }

@@ -12,60 +12,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047d7fa0c70d66744bdc19d60e7e38fe, type: 3}
   m_Name: BusinessesConfig
   m_EditorClassIdentifier: 
-  Values:
-  - Id: 1
-    IncomeTime: 3
-    BaseLevelUpPrice: 3
-    BaseIncome: 3
-    UpgradeDatas:
-    - Id: 1
+  values:
+  - id: 1
+    incomeTime: 3
+    baseLevelUpPrice: 3
+    baseIncome: 3
+    upgradeDatas:
+    - id: 1
+      price: 50
+      factor: 0.5
+      Id: 1
       Price: 50
       Factor: 0.5
-    - Id: 2
+    - id: 2
+      price: 400
+      factor: 1
+      Id: 2
       Price: 400
       Factor: 1
-  - Id: 2
-    IncomeTime: 6
-    BaseLevelUpPrice: 40
-    BaseIncome: 40
-    UpgradeDatas:
-    - Id: 1
+  - id: 2
+    incomeTime: 6
+    baseLevelUpPrice: 40
+    baseIncome: 40
+    upgradeDatas:
+    - id: 1
+      price: 1200
+      factor: 1
+      Id: 1
       Price: 1200
       Factor: 1
-    - Id: 2
+    - id: 2
+      price: 4000
+      factor: 2
+      Id: 2
       Price: 4000
       Factor: 2
-  - Id: 3
-    IncomeTime: 10
-    BaseLevelUpPrice: 200
-    BaseIncome: 200
-    UpgradeDatas:
-    - Id: 1
+  - id: 3
+    incomeTime: 10
+    baseLevelUpPrice: 200
+    baseIncome: 200
+    upgradeDatas:
+    - id: 1
+      price: 6000
+      factor: 1
+      Id: 1
       Price: 6000
       Factor: 1
-    - Id: 2
+    - id: 2
+      price: 20000
+      factor: 1.5
+      Id: 2
       Price: 20000
       Factor: 1.5
-  - Id: 4
-    IncomeTime: 17
-    BaseLevelUpPrice: 1000
-    BaseIncome: 1000
-    UpgradeDatas:
-    - Id: 1
+  - id: 4
+    incomeTime: 17
+    baseLevelUpPrice: 1000
+    baseIncome: 1000
+    upgradeDatas:
+    - id: 1
+      price: 15000
+      factor: 1
+      Id: 1
       Price: 15000
       Factor: 1
-    - Id: 2
+    - id: 2
+      price: 50000
+      factor: 2
+      Id: 2
       Price: 50000
       Factor: 2
-  - Id: 5
-    IncomeTime: 30
-    BaseLevelUpPrice: 5000
-    BaseIncome: 5000
-    UpgradeDatas:
-    - Id: 1
+  - id: 5
+    incomeTime: 30
+    baseLevelUpPrice: 5000
+    baseIncome: 5000
+    upgradeDatas:
+    - id: 1
+      price: 100000
+      factor: 2
+      Id: 1
       Price: 100000
       Factor: 2
-    - Id: 2
+    - id: 2
+      price: 500000
+      factor: 4
+      Id: 2
       Price: 500000
       Factor: 4
-  InitialBusinessId: 1
+  initialBusinessId: 1

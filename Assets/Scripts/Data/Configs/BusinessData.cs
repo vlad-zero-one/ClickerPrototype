@@ -7,12 +7,18 @@ namespace Game.Configs
     [Serializable]
     public class BusinessData
     {
-        public string Id;
+        [SerializeField] private string id;
         [Space]
-        public float IncomeTime;
-        public double BaseLevelUpPrice;
-        public double BaseIncome;
+        [SerializeField] private float incomeTime;
+        [SerializeField] private double baseLevelUpPrice;
+        [SerializeField] private double baseIncome;
         [Space]
-        public List<BusinessUpgradeData> UpgradeDatas;
+        [SerializeField] private List<BusinessUpgradeData> upgradeDatas;
+
+        public string Id => id;
+        public float IncomeTime => incomeTime;
+        public double BaseLevelUpPrice => baseLevelUpPrice;
+        public double BaseIncome => baseIncome;
+        public IReadOnlyList<BusinessUpgradeData> UpgradeDatas => upgradeDatas;
     }
 }

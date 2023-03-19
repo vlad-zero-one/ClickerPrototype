@@ -6,8 +6,8 @@ namespace Game.Save
     [Serializable]
     public class SaveData
     {
-        public double Balance;
+        public readonly List<SaveDataBusiness> Bisunesses = new();
 
-        public List<SaveDataBusiness> Bisunesses = new();
+        public double Balance;
     }
 }

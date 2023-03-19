@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b4fd529f7db3345b3f8e8101c56146, type: 3}
   m_Name: SaveConfig
   m_EditorClassIdentifier: 
-  SaveFileName: SaveData.dat
+  saveFileName: SaveData.dat

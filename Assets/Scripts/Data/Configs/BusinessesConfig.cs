@@ -6,8 +6,10 @@ namespace Game.Configs
     [CreateAssetMenu]
     public class BusinessesConfig : ScriptableObject
     {
-        public List<BusinessData> Values;
+        [SerializeField] private List<BusinessData> values;
+        [SerializeField] private string initialBusinessId;
 
-        public string InitialBusinessId;
+        public IReadOnlyList<BusinessData> Values => values;
+        public string InitialBusinessId => initialBusinessId;
     }
 }

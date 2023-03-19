@@ -5,6 +5,8 @@ namespace Game.Configs
     [CreateAssetMenu]
     public class SaveConfig : ScriptableObject
     {
-        public string SaveFileName;
+        [SerializeField] private string saveFileName;
+
+        public string SaveFileName => saveFileName;
     }
 }
