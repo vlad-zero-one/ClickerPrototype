@@ -15,11 +15,7 @@ namespace Game.Systems
 
         private readonly SaveConfig saveConfig;
 
-        //private readonly BusinessesManager businessesManager;
-
         private readonly BalanceManager balanceManager;
-
-        private readonly EcsFilter<BusinessComponent, ProgressComponent> progressFilter;
 
         private readonly EcsFilter<DropSaveComponent> dropSaveFilter;
 
@@ -73,15 +69,6 @@ namespace Game.Systems
             var file = File.Create(saveFilePath);
             var data = new SaveData();
 
-            //data.Balance = businessesManager.Balance;
-            //foreach(var i in progressFilter)
-            //{
-            //    var business = progressFilter.Get1(i).Business;
-            //    var progress = progressFilter.Get2(i).Progress;
-
-            //    data.Bisunesses.Add(new SaveDataBusiness(business, progress));
-            //}
-
             data.Balance = balanceManager.Balance;
             foreach (var i in newBusinessesFilter)
             {
@@ -110,8 +97,6 @@ namespace Game.Systems
             var data = (SaveData)formatter.Deserialize(file);
             file.Close();
 
-            //businessesManager.SetMoney(data.Balance);
-
             balanceManager.SetMoney(data.Balance);
             ecsWorld.NewEntity().Get<UpdateBalanceComponent>();
 
@@ -120,14 +105,6 @@ namespace Game.Systems
             foreach (var businessData in data.Bisunesses)
             {
                 businessLoadData.Add(businessData.Id, businessData);
-
-                //    if (businessesManager.LoadBusiness(businessData))
-                //    {
-                //        var progressEntity = ecsWorld.NewEntity();
-                //        progressEntity.Get<BusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
-                //        progressEntity.Get<ProgressComponent>().Progress = businessData.Progress;
-                //        progressEntity.Get<UpdateBusinessComponent>().Business = businessesManager.Businesses[businessData.Id];
-                //    }
             }
 
             foreach (var i in newBusinessesFilter)

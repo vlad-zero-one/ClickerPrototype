@@ -12,8 +12,6 @@ namespace Game.Systems
         private readonly BusinessesConfig businessesConfig;
         private readonly NamesConfig namesConfig;
 
-        private readonly BusinessesManager businessesManager;
-
         public void Init()
         {
             foreach(var businessData in businessesConfig.Values)
@@ -21,12 +19,8 @@ namespace Game.Systems
                 var nameData = namesConfig.Values.FirstOrDefault(data => data.Id == businessData.Id);
                 nameData ??= namesConfig.Values.First();
 
-                var business = new Business(businessData, nameData);
-
                 var businessComponent = new NewBusinessComponent(businessData, nameData);
                 ecsWorld.NewEntity().Replace(in businessComponent);
-
-                //businessesManager.AddBusiness(business);
             }
         }
     }
