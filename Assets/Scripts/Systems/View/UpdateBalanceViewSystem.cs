@@ -13,7 +13,7 @@ namespace Game.Systems
         
         public void Run ()
         {
-            if (filter.GetEntitiesCount() > 0)
+            if (!filter.IsEmpty())
             {
                 balanceView.SetValue(balanceManager.Balance);
             }

@@ -17,7 +17,6 @@ namespace Game.Systems
                 balanceManager.AddMoney(filter.Get1(i).Income);
 
                 entity.Get<UpdateBalanceViewComponent>();
-                entity.Del<IncomeComponent>();
             }
         }
     }

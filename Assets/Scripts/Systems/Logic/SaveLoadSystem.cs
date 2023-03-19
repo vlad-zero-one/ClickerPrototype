@@ -38,10 +38,8 @@ namespace Game.Systems
 
         public void Run()
         {
-            foreach (var i in dropSaveFilter)
+            if (!dropSaveFilter.IsEmpty())
             {
-                dropSaveFilter.GetEntity(i).Del<DropSaveComponent>();
-
                 if (File.Exists(saveFilePath))
                 {
                     File.Delete(saveFilePath);

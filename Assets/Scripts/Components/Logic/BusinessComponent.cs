@@ -12,8 +12,6 @@ namespace Game.Components
 
         private readonly Dictionary<string, BusinessUpgrade> upgrades;
 
-        public List<BusinessUpgrade> Upgrades => upgrades.Values.ToList();
-
         public BusinessComponent(BusinessData data, BusinessNamesData namesData)
         {
             this.data = data;
@@ -34,11 +32,13 @@ namespace Game.Components
             }
         }
 
-        public string Id => data.Id;
-        public string Name => namesData.BusinessName;
-        public double Income => Level * data.BaseIncome * (1 + Factors());
-        public float IncomeTime => data.IncomeTime;
-        public double LevelUpPrice => (Level + 1) * data.BaseLevelUpPrice;
+        public readonly string Id => data.Id;
+        public readonly string Name => namesData.BusinessName;
+        public readonly double Income => Level * data.BaseIncome * (1 + Factors());
+        public readonly float IncomeTime => data.IncomeTime;
+        public readonly double LevelUpPrice => (Level + 1) * data.BaseLevelUpPrice;
+        public readonly IReadOnlyList<BusinessUpgrade> Upgrades => upgrades.Values.ToList();
+
         public int Level { get; private set; }
 
         public void LevelUp()

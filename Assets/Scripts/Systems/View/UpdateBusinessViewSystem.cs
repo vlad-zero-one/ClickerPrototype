@@ -8,19 +8,16 @@ namespace Game.Systems
     {
         private readonly BusinessViewsController businessViewController;
 
-        private readonly EcsFilter<UpdateBusinessViewComponent, BusinessComponent> newFilter;
+        private readonly EcsFilter<BusinessComponent, UpdateBusinessViewComponent> newFilter;
 
 
         public void Run()
         {
             foreach (var i in newFilter)
             {
-                ref var business = ref newFilter.Get2(i);
-                ref var entity = ref newFilter.GetEntity(i);
+                ref var business = ref newFilter.Get1(i);
 
                 businessViewController.UpdateView(ref business);
-
-                entity.Del<UpdateBusinessViewComponent>();
             }
         }
     }
