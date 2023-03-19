@@ -36,7 +36,7 @@ namespace Game
                 .Add(CreateSystems())
                 .Add(CreateViewSystems())
 
-                .OneFrame<UpdateBalanceComponent>()
+                .OneFrame<UpdateBalanceViewComponent>()
 
                 .Inject(businessesConfig)
                 .Inject(namesConfig)
@@ -60,9 +60,9 @@ namespace Game
                 .Add(new InitialBusinessSystem())
                 .Add(new SaveLoadSystem())
                 .Add(new LevelUpSystem())
-                .OneFrame<NewLevelUpClickComponent>()
+                .OneFrame<LevelUpClickComponent>()
                 .Add(new BuyUpgradeSystem())
-                .OneFrame<NewBuyUpgradeClickComponent>()
+                .OneFrame<BuyUpgradeClickComponent>()
                 .Add(new ProgressSystem())
                 .Add(new IncomeSystem());
 

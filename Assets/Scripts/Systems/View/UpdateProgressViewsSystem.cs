@@ -8,13 +8,13 @@ namespace Game.Systems
     {
         private readonly BusinessViewsController businessViewsController;
 
-        private readonly EcsFilter<NewBusinessComponent, ProgressComponent> newFilter;
+        private readonly EcsFilter<BusinessComponent, ProgressComponent> filter;
 
         public void Run()
         {
-            foreach (var i in newFilter)
+            foreach (var i in filter)
             {
-                businessViewsController.SetProgress(newFilter.Get1(i).Id, newFilter.Get2(i).Progress);
+                businessViewsController.SetProgress(filter.Get1(i).Id, filter.Get2(i).Progress);
             }
         }
     }

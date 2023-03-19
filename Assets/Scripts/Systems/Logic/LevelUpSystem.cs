@@ -7,9 +7,9 @@ namespace Game.Systems
     {
         private readonly BalanceManager balanceManager;
 
-        private readonly EcsFilter<NewLevelUpClickComponent> levelUpClickFilter;
+        private readonly EcsFilter<LevelUpClickComponent> levelUpClickFilter;
 
-        private readonly EcsFilter<NewBusinessComponent> businessFilter;
+        private readonly EcsFilter<BusinessComponent> businessFilter;
 
         public void Run()
         {
@@ -31,9 +31,9 @@ namespace Game.Systems
                                 businessEntity.Get<ProgressComponent>();
                             }
 
-                            businessEntity.Get<NewUpdateBusinessComponent>();
+                            businessEntity.Get<UpdateBusinessViewComponent>();
 
-                            levelUpClickFilter.GetEntity(i).Get<UpdateBalanceComponent>();
+                            levelUpClickFilter.GetEntity(i).Get<UpdateBalanceViewComponent>();
                         }
 
                         break;

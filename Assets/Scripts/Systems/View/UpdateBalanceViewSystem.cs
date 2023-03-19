@@ -9,7 +9,7 @@ namespace Game.Systems
         private readonly BalanceView balanceView;
         private readonly BalanceManager balanceManager;
 
-        private readonly EcsFilter<UpdateBalanceComponent> filter;
+        private readonly EcsFilter<UpdateBalanceViewComponent> filter;
         
         public void Run ()
         {

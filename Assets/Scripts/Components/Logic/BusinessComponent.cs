@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace Game.Components
 {
-    public struct NewBusinessComponent
+    public struct BusinessComponent
     {
-        public NewBusinessUpgradeComponent FirstUpgrade;
-        public NewBusinessUpgradeComponent SecondUpgrade;
+        public BusinessUpgradeComponent FirstUpgrade;
+        public BusinessUpgradeComponent SecondUpgrade;
 
         private readonly BusinessData data;
         private readonly BusinessNamesData namesData;
 
-        private Dictionary<string, NewBusinessUpgradeComponent> upgrades;
+        private Dictionary<string, BusinessUpgradeComponent> upgrades;
 
-        public NewBusinessComponent(BusinessData data, BusinessNamesData namesData)
+        public BusinessComponent(BusinessData data, BusinessNamesData namesData)
         {
             this.data = data;
             this.namesData = namesData;

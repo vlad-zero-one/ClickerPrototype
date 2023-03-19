@@ -16,7 +16,7 @@ namespace Game.Systems
                 ref var entity = ref filter.GetEntity(i);
                 balanceManager.AddMoney(filter.Get1(i).Income);
 
-                entity.Get<UpdateBalanceComponent>();
+                entity.Get<UpdateBalanceViewComponent>();
                 entity.Del<IncomeComponent>();
             }
         }

@@ -13,12 +13,12 @@ namespace Editor
     {
         public Type GetFieldType()
         {
-            return typeof(NewBusinessComponent);
+            return typeof(BusinessComponent);
         }
 
         public void OnGUI(string label, object value, EcsWorld world, ref EcsEntity entityId)
         {
-            var component = (NewBusinessComponent)value;
+            var component = (BusinessComponent)value;
 
             EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;

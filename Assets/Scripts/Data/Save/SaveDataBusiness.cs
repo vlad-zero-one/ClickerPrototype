@@ -12,7 +12,7 @@ namespace Game.Save
         public bool FirstUpgradeBought;
         public bool SecondUpgradeBought;
 
-        public SaveDataBusiness(ref NewBusinessComponent business, float progress)
+        public SaveDataBusiness(ref BusinessComponent business, float progress)
         {
             Id = business.Id;
             Level = business.Level;

@@ -8,7 +8,7 @@ namespace Game.Systems
     {
         private readonly BusinessViewsController businessViewController;
 
-        private readonly EcsFilter<NewUpdateBusinessComponent, NewBusinessComponent> newFilter;
+        private readonly EcsFilter<UpdateBusinessViewComponent, BusinessComponent> newFilter;
 
 
         public void Run()
@@ -20,7 +20,7 @@ namespace Game.Systems
 
                 businessViewController.UpdateView(ref business);
 
-                entity.Del<NewUpdateBusinessComponent>();
+                entity.Del<UpdateBusinessViewComponent>();
             }
         }
     }

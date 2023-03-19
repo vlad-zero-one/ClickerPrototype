@@ -2,12 +2,12 @@ using Game.Configs;
 
 namespace Game.Components
 {
-    public struct NewBusinessUpgradeComponent
+    public struct BusinessUpgradeComponent
     {
         private readonly BusinessUpgradeData data;
         private readonly string name;
 
-        public NewBusinessUpgradeComponent(BusinessUpgradeData data, string name)
+        public BusinessUpgradeComponent(BusinessUpgradeData data, string name)
         {
             this.data = data;
             this.name = name;

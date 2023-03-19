@@ -19,7 +19,7 @@ namespace Game.Systems
                 var nameData = namesConfig.Values.FirstOrDefault(data => data.Id == businessData.Id);
                 nameData ??= namesConfig.Values.First();
 
-                var businessComponent = new NewBusinessComponent(businessData, nameData);
+                var businessComponent = new BusinessComponent(businessData, nameData);
                 ecsWorld.NewEntity().Replace(in businessComponent);
             }
         }

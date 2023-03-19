@@ -29,7 +29,7 @@ namespace Game.View
         public event LevelUpClick OnLevelUpClick;
         public event UpgradeClick OnBuyUpgradeClick;
 
-        public void Init(ref NewBusinessComponent business)
+        public void Init(ref BusinessComponent business)
         {
             businessId = business.Id;
             incomeTime = business.IncomeTime;
@@ -46,7 +46,7 @@ namespace Game.View
             secondUpgrade.OnClick += BuyUpgrade;
         }
 
-        public void UpdateView(ref NewBusinessComponent business)
+        public void UpdateView(ref BusinessComponent business)
         {
             levelText.text = business.Level.ToString();
             incomeText.text = string.Format(priceFormat, business.Income);

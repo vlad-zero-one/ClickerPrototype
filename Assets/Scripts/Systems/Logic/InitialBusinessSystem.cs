@@ -8,13 +8,13 @@ namespace Game.Systems
     {
         private readonly BusinessesConfig businessesConfig;
 
-        private readonly EcsFilter<NewBusinessComponent> newProgressFilter;
+        private readonly EcsFilter<BusinessComponent> filter;
 
         public void Init()
         {
-            foreach (var i in newProgressFilter)
+            foreach (var i in filter)
             {
-                ref var business = ref newProgressFilter.Get1(i);
+                ref var business = ref filter.Get1(i);
 
                 if (business.Id != businessesConfig.InitialBusinessId)
                 {
@@ -23,7 +23,7 @@ namespace Game.Systems
 
                 business.LevelUp();
 
-                newProgressFilter.GetEntity(i).Get<ProgressComponent>();
+                filter.GetEntity(i).Get<ProgressComponent>();
             }
         }
     }

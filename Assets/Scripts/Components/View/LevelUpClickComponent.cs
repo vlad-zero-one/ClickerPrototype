@@ -1,6 +1,6 @@
 namespace Game.Components
 {
-    public struct NewLevelUpClickComponent
+    public struct LevelUpClickComponent
     {
         public string BusinessId;
     }

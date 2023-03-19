@@ -19,7 +19,7 @@ namespace Game.Systems
 
         private readonly EcsFilter<DropSaveComponent> dropSaveFilter;
 
-        private readonly EcsFilter<NewBusinessComponent> newBusinessesFilter;
+        private readonly EcsFilter<BusinessComponent> businessesFilter;
 
         private string saveFilePath;
 
@@ -70,12 +70,12 @@ namespace Game.Systems
             var data = new SaveData();
 
             data.Balance = balanceManager.Balance;
-            foreach (var i in newBusinessesFilter)
+            foreach (var i in businessesFilter)
             {
-                ref var businessEntuty = ref newBusinessesFilter.GetEntity(i);
+                ref var businessEntuty = ref businessesFilter.GetEntity(i);
                 if (businessEntuty.Has<ProgressComponent>())
                 {
-                    ref var business = ref businessEntuty.Get<NewBusinessComponent>();
+                    ref var business = ref businessEntuty.Get<BusinessComponent>();
                     var progress = businessEntuty.Get<ProgressComponent>().Progress;
 
                     data.Bisunesses.Add(new SaveDataBusiness(ref business, progress));
@@ -98,7 +98,7 @@ namespace Game.Systems
             file.Close();
 
             balanceManager.SetMoney(data.Balance);
-            ecsWorld.NewEntity().Get<UpdateBalanceComponent>();
+            ecsWorld.NewEntity().Get<UpdateBalanceViewComponent>();
 
             var businessLoadData = new Dictionary<string, SaveDataBusiness>();
 
@@ -107,17 +107,17 @@ namespace Game.Systems
                 businessLoadData.Add(businessData.Id, businessData);
             }
 
-            foreach (var i in newBusinessesFilter)
+            foreach (var i in businessesFilter)
             {
-                ref var entity = ref newBusinessesFilter.GetEntity(i);
-                ref var businessComponent = ref newBusinessesFilter.Get1(i);
+                ref var entity = ref businessesFilter.GetEntity(i);
+                ref var businessComponent = ref businessesFilter.Get1(i);
 
                 if (businessLoadData.TryGetValue(businessComponent.Id, out var businessData))
                 {
                     businessComponent.FromLoad(businessData);
 
                     entity.Get<ProgressComponent>().Progress = businessData.Progress;
-                    entity.Get<NewUpdateBusinessComponent>();
+                    entity.Get<UpdateBusinessViewComponent>();
                 }
             }
 

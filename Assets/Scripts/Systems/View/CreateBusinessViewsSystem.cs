@@ -8,7 +8,7 @@ namespace Game.Systems
     {
         private readonly BusinessViewsController businessViewsController;
 
-        private readonly EcsFilter<NewBusinessComponent> businessesFilter;
+        private readonly EcsFilter<BusinessComponent> businessesFilter;
 
         public void Init()
         {

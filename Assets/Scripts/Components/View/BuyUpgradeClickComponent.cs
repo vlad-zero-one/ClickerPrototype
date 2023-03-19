@@ -1,6 +1,6 @@
 namespace Game.Components
 {
-    public struct NewBuyUpgradeClickComponent
+    public struct BuyUpgradeClickComponent
     {
         public string BusinessId;
         public string BusinessUpgradeId;

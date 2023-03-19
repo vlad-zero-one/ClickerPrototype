@@ -7,9 +7,9 @@ namespace Game.Systems
     {
         private readonly BalanceManager balanceManager;
 
-        private readonly EcsFilter<NewBuyUpgradeClickComponent> upgradeClickFilter;
+        private readonly EcsFilter<BuyUpgradeClickComponent> upgradeClickFilter;
 
-        private readonly EcsFilter<NewBusinessComponent, ProgressComponent> businessFilter;
+        private readonly EcsFilter<BusinessComponent, ProgressComponent> businessFilter;
 
         public void Run()
         {
@@ -27,9 +27,9 @@ namespace Game.Systems
                         {
                             business.BuyUpgrade(upgradeId);
 
-                            businessFilter.GetEntity(j).Get<NewUpdateBusinessComponent>();
+                            businessFilter.GetEntity(j).Get<UpdateBusinessViewComponent>();
 
-                            upgradeClickFilter.GetEntity(i).Get<UpdateBalanceComponent>();
+                            upgradeClickFilter.GetEntity(i).Get<UpdateBalanceViewComponent>();
                         }
                     }
                 }
